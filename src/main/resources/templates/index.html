@@ -1,29 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <link th:href="@{/style/index.css}" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <title>게시판</title>
-</head>
-<body>
-
-<div class="jumbotron text-center" style="margin-bottom:0">
-  <h1>게시판</h1>
-</div>
-
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/">게시판</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/upload">글 등록</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="content">
 
 <h1>게시판</h1>
 <table>
@@ -37,12 +16,14 @@
   </thead>
   <tbody>
   <tr th:each="board : ${boardList}">
-    <td><span th:text="${board.no}"></span></td>
+    <td><span id="board-id" th:text="${board.no}"></span></td>
     <td><span th:text="${board.title}"></span></td>
     <td><span th:text="${board.writer}"></span></td>
     <td><span th:text="${#temporals.format(board.modifiedAt, 'yyyy-MM-dd HH:mm:ss')}"></span></td>
+    <td><button th:onclick="|javascript:deletePost('${board.no}')|">삭제</button></td>
   </tr>
   </tbody>
 </table>
-</body>
+
+</th:block>
 </html>

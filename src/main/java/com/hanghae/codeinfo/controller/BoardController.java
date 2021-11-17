@@ -44,4 +44,11 @@ public class BoardController {
         boardRepository.save(board);
         return "redirect:/";
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    public Long deletePost(@PathVariable Long id) {
+        boardRepository.deleteById(id);
+        return id;
+    }
 }
