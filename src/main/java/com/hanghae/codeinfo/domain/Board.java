@@ -26,9 +26,13 @@ public class Board extends Timestamped {
     @Column(nullable = false)
     private String writer;
 
+    @Column(nullable = false)
+    private String content;
+
 
     public Board(BoardRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.writer = requestDto.getWriter();
+        this.content = requestDto.getContent();
     }
 }

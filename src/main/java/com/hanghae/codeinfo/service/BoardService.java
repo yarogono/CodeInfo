@@ -1,13 +1,17 @@
 package com.hanghae.codeinfo.service;
 
+import com.hanghae.codeinfo.domain.Board;
+import com.hanghae.codeinfo.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class BoardService {
+
+    private final BoardRepository boardRepository;
 
 //    private final ProductRepository productRepository;
 //

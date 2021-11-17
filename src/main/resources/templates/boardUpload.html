@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="content">
+    <div class="upload">
+        <div class="upload-container" style="margin-top:30px">
+            <form class="upload__form" action="/upload" method = "post">
+                <div class="upload__input">
+                    <div class="form-title">
+                        <input type="text" class="upload-title" id="title"
+                               name = "title" placeholder="제목 쓰기" required>
+                    </div>
+                    <div class="form-writer">
+                        <input type="text" class="upload-writer" id="writer"
+                               name="writer" placeholder="작성자" required>
+                    </div>
+                    <div class="form-content">
+                        <textarea type="text" class="upload-content" id="content" name="content"
+                                  rows="5" cols="33" placeholder="내용을 작성해주세요." required></textarea>
+                    </div>
+                </div>
+                <div class="form__btn">
+                    <button type="submit" class="upload-btn__write">글쓰기</button>
+                    <a class="upload-btn__cancel" href="/" style="color: white;" >취 소</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</th:block>
+</html>
