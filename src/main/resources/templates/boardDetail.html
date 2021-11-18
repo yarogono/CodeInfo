@@ -4,16 +4,23 @@
       layout:decorator="layout/default">
 <th:block layout:fragment="content">
     <div class="upload">
-        <div class="upload-container" style="margin-top:30px">
-            <form class="upload__form" action="/upload" method = "post">
+        <div class="upload-container">
+            <form class="upload__form" th:action="@{/detail/__${board.no}__}" method = "post">
+                <input type="hidden" name="_method" value="PUT">
                 <div class="upload__input">
+                    <div>
+                        <input type="checkbox" id="update-checkbox" name="scales">
+                        <label for="update-checkbox">수정하기</label>
+                    </div>
                     <div class="form-title">
                         <input type="text" class="upload-title" id="title"
-                               name = "title" placeholder="제목 쓰기" th:value="${board.title}" readonly>
+                               name = "title" placeholder="제목 쓰기" th:value="${board.title}"
+                               minlength="1" maxlength="25" readonly>
                     </div>
                     <div class="form-writer">
                         <input type="text" class="upload-writer" id="writer"
-                               name="writer" placeholder="작성자" th:value="${board.writer}" readonly>
+                               name="writer" placeholder="작성자" th:value="${board.writer}"
+                               minlength="1" maxlength="15" readonly>
                     </div>
                     <div class="form-content">
                         <textarea type="text" class="upload-content" id="content" name="content"
@@ -21,7 +28,7 @@
                     </div>
                 </div>
                 <div class="form__btn">
-                    <button type="submit" class="upload-btn__write">글쓰기</button>
+                    <button type="submit" class="upload-btn__write">수 정</button>
                     <a class="upload-btn__cancel" href="/" style="color: white;" >취 소</a>
                 </div>
             </form>

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor // 기본 생성자를 만들어줍니다.
 @Entity // DB 테이블 역할을 합니다.
-public class Board extends Timestamped {
+public class Board extends Timestamped implements Comparable<Board> {
 
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,5 +34,22 @@ public class Board extends Timestamped {
         this.title = requestDto.getTitle();
         this.writer = requestDto.getWriter();
         this.content = requestDto.getContent();
+    }
+
+    public void update(Board board) {
+        this.title = board.getTitle();
+        this.writer = board.getWriter();
+        this.content = board.getContent();
+    }
+
+    @Override
+    public int compareTo(Board o) {
+        if(this.no > o.no) {
+            return -1;
+        } else if(this.no < o.no) {
+            return 1;
+        } else{
+            return 0;
+        }
     }
 }
