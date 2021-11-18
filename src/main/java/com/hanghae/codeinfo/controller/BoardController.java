@@ -4,11 +4,16 @@ package com.hanghae.codeinfo.controller;
 import com.hanghae.codeinfo.domain.Board;
 import com.hanghae.codeinfo.repository.BoardRepository;
 import com.hanghae.codeinfo.service.BoardService;
+import com.hanghae.codeinfo.utils.ViewCount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.filter.HiddenHttpMethodFilter;
+
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,11 +47,15 @@ public class BoardController {
     }
 
 
+
     // 게시글 상세 페이지
     @GetMapping("/detail/{id}")
-    public String boardDetailPage(@PathVariable Long id, Model model) {
+    public String boardDetailPage(@PathVariable Long id, Model model, HttpServletRequest request,
+                                    HttpServletResponse response) {
         Optional<Board> result = boardRepository.findById(id);
         Board board = result.get();
+        ViewCount viewCount = new ViewCount(boardService);
+        viewCount.viewCountUp(id, request, response, board);
         model.addAttribute("board", board);
         return "boardDetail";
     }
@@ -78,7 +87,6 @@ public class BoardController {
 
     @PutMapping("/detail/{id}")
     public String updateNotice(@PathVariable Long id, BoardForm form) {
-        System.out.println(id);
         Board board = new Board();
         board.setTitle(form.getTitle());
         board.setWriter(form.getWriter());

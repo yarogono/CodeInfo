@@ -29,6 +29,9 @@ public class Board extends Timestamped implements Comparable<Board> {
     @Column(nullable = false)
     private String content;
 
+    @Column(columnDefinition = "integer default 0")
+    private int views;
+
 
     public Board(BoardRequestDto requestDto) {
         this.title = requestDto.getTitle();
@@ -40,6 +43,7 @@ public class Board extends Timestamped implements Comparable<Board> {
         this.title = board.getTitle();
         this.writer = board.getWriter();
         this.content = board.getContent();
+        this.views = board.getViews();
     }
 
     @Override

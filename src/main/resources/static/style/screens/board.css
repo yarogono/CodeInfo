@@ -87,3 +87,8 @@
 .board__delete button:hover {
     color: tomato;
 }
+
+.board__views {
+    margin-right: 5px;
+    font-weight: bold;
+}

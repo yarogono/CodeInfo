@@ -18,6 +18,10 @@
                 <a th:href="@{/detail/__${board.no}__}" th:text="${board.title}">게시물 제목</a>
               </div>
               <div class="board__sub">
+                <div class="board__views">
+                  <span>조회수 </span>
+                  <span th:text="${board.views} + '회'">조회수</span>
+                </div>
                 <div class="board__writer">
                     <span>작성자: </span>
                     <span th:text="${board.writer}">작성자</span>
