@@ -6,7 +6,7 @@
 <th:block th:fragment="scriptFragment">
 
     <!--    메인 자바스크립트   -->
-    <script defer src="/js/board.js"></script>
-
+    <script defer th:src="@{/js/board.js}"></script>
+    <script defer th:src="@{/js/boardPaging.js}"></script>
 </th:block>
 </html>

@@ -6,17 +6,18 @@ import com.hanghae.codeinfo.repository.BoardRepository;
 import com.hanghae.codeinfo.service.BoardService;
 import com.hanghae.codeinfo.utils.ViewCount;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 //@RequiredArgsConstructor
@@ -31,18 +32,40 @@ public class BoardController {
     
     // @Autowired 어노테이션을 활용한 의존성 주입
     @Autowired
-    public BoardController(BoardRepository boardRepository, BoardService boardService, BoardService boardService1) {
+    public BoardController(BoardRepository boardRepository, BoardService boardService) {
         this.boardRepository = boardRepository;
-        this.boardService = boardService1;
+        this.boardService = boardService;
     }
 
 
     // 메인페이지
     @GetMapping("/")
     public String boardListPage(Model model) {
-        List<Board> boards = boardRepository.findAll();
-        Collections.sort(boards);
-        model.addAttribute("boardList", boards);
+        Pageable boardPage = PageRequest.of(0, 5, Sort.by("no").descending());
+        Page<Board> boardList = boardRepository.findAll(boardPage);
+        model.addAttribute("boardList", boardList);
+
+        if(boardList.getTotalPages() > 1) {
+            model.addAttribute("nextPage", 1);
+        }
+        return "boardList";
+    }
+
+    @GetMapping("/{page}")
+    public String boardListPaging(@PathVariable int page, Model model) {
+        Pageable boardPage = PageRequest.of(page, 5, Sort.by("no").descending());
+        Page<Board> boardList = boardRepository.findAll(boardPage);
+        model.addAttribute("boardList", boardList);
+        System.out.println(boardList.getNumber());
+        if(boardList.getNumber() > 0) {
+            int prevPage = boardList.getNumber() - 1;
+            model.addAttribute("prevPage", prevPage);
+        }
+
+        if(boardList.getNumber() < boardList.getTotalPages() - 1) {
+            int nextPage = boardList.getNumber() + 1;
+            model.addAttribute("nextPage", nextPage);
+        }
         return "boardList";
     }
 
@@ -57,6 +80,7 @@ public class BoardController {
         ViewCount viewCount = new ViewCount(boardService);
         viewCount.viewCountUp(id, request, response, board);
         model.addAttribute("board", board);
+
         return "boardDetail";
     }
 

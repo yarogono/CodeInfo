@@ -1,5 +1,7 @@
 const UPDATE_CHECKBOX = document.getElementById("update-checkbox");
 
+
+
 function deletePost(postNum) {
     $.ajax({
         type: "DELETE",
@@ -31,4 +33,6 @@ function init() {
     UPDATE_CHECKBOX.addEventListener("change", isChecked)
 }
 
-init();
+if(UPDATE_CHECKBOX) {
+    init();
+}
