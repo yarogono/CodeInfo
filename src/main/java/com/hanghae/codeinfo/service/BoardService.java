@@ -24,7 +24,6 @@ public class BoardService {
 
     @Transactional
     public void viewCountUp(Board board) {
-        board.setViews(board.getViews() + 1);
-        board.update(board);
+        board.updateViews(board);
     }
 }

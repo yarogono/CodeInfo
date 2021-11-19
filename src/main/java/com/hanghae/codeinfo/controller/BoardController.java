@@ -2,6 +2,7 @@ package com.hanghae.codeinfo.controller;
 
 
 import com.hanghae.codeinfo.domain.Board;
+import com.hanghae.codeinfo.dto.BoardRequestDto;
 import com.hanghae.codeinfo.repository.BoardRepository;
 import com.hanghae.codeinfo.service.BoardService;
 import com.hanghae.codeinfo.utils.ViewCount;
@@ -93,10 +94,11 @@ public class BoardController {
 
     @PostMapping("/post")
     public String uploadNotice(BoardForm form) {
-        Board board = new Board();
-        board.setTitle(form.getTitle());
-        board.setWriter(form.getWriter());
-        board.setContent(form.getContent());
+        String title = form.getTitle();
+        String writer = form.getWriter();
+        String content = form.getContent();
+        BoardRequestDto requestDto = new BoardRequestDto(title, writer, content);
+        Board board = new Board(requestDto);
         boardRepository.save(board);
         return "redirect:/";
     }
@@ -111,10 +113,12 @@ public class BoardController {
 
     @PutMapping("/detail/{id}")
     public String updateNotice(@PathVariable Long id, BoardForm form) {
-        Board board = new Board();
-        board.setTitle(form.getTitle());
-        board.setWriter(form.getWriter());
-        board.setContent(form.getContent());
+
+        String title = form.getTitle();
+        String writer = form.getWriter();
+        String content = form.getContent();
+        BoardRequestDto requestDto = new BoardRequestDto(title, writer, content);
+        Board board = new Board(requestDto);
         boardService.update(id, board);
         return "redirect:/";
     }
