@@ -1,4 +1,4 @@
-.login {
+.user_form {
     height: 95vh;
     display: flex;
     justify-content: center;
@@ -21,6 +21,7 @@
 }
 .main_con_form h1 {
     font-size: 28px;
+    font-weight: bold;
 }
 .form_list_input {
     width: 254px;
@@ -60,4 +61,5 @@
     color: #efefef;
     background: #e96c7c;
     border-radius: 20px;
+    border: none;
 }
