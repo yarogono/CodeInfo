@@ -15,4 +15,6 @@ public class UserController {
     public String joinPage() {
         return "join";
     }
+
+
 }

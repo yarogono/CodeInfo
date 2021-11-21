@@ -6,7 +6,7 @@
 
 /* Screens */
 @import "screens/board.css";
-@import "screens/login.css";
+@import "screens/userForm.css";
 @import "screens/upload.css";
 
 

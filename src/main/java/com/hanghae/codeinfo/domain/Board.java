@@ -2,8 +2,10 @@ package com.hanghae.codeinfo.domain;
 
 import com.hanghae.codeinfo.dto.BoardRequestDto;
 import com.hanghae.codeinfo.utils.Timestamped;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
 
@@ -31,10 +33,16 @@ public class Board extends Timestamped {
     private int views;
 
 
-    public Board(BoardRequestDto requestDto) {
-        this.title = requestDto.getTitle();
-        this.writer = requestDto.getWriter();
-        this.content = requestDto.getContent();
+    @Builder
+    public Board(String title, String writer, String content, int views) {
+        Assert.notNull(title, "title가 null입니다.");
+        Assert.notNull(writer, "writer가 null입니다.");
+        Assert.notNull(content, "content가 null입니다.");
+
+        this.title = title;
+        this.writer = writer;
+        this.content = content;
+        this.views = views;
     }
 
     public void update(Board board) {
@@ -50,4 +58,6 @@ public class Board extends Timestamped {
         this.content = board.getContent();
         this.views = board.getViews() + 1;
     }
+
+
 }

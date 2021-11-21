@@ -20,4 +20,7 @@ function init() {
 }
 
 
-init();
+if(NEXT_PAGE_BTN) {
+    init();
+}
+

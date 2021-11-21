@@ -1,6 +1,7 @@
 package com.hanghae.codeinfo.utils;
 
 import com.hanghae.codeinfo.domain.Board;
+import com.hanghae.codeinfo.repository.BoardRepository;
 import com.hanghae.codeinfo.service.BoardService;
 
 import javax.servlet.http.Cookie;
@@ -11,13 +12,15 @@ public class ViewCount {
 
     private final BoardService boardService;
 
-    public ViewCount(BoardService boardService) {
+    private final BoardRepository boardRepository;
+
+    public ViewCount(BoardService boardService, BoardRepository boardRepository) {
         this.boardService = boardService;
+        this.boardRepository = boardRepository;
     }
 
 
-    public void viewCountUp(Long id, HttpServletRequest request, HttpServletResponse response, Board board) {
-
+    public void viewCookieCheck(Long id, HttpServletRequest request, HttpServletResponse response, Board board) {
         Cookie oldCookie = null;
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {

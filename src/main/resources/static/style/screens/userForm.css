@@ -11,33 +11,47 @@
     padding: 40px;
     background-color: orange;
     border-radius: 12px;
+    height: 29vh;
+    width: 16vw;
 }
-.main_con_form span {
+.form_inner-title {
     color: #efefef;
+    margin-bottom: 1vh;
+    font-size: 28px;
+    font-weight: bold;
 }
 .form_inner {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-.main_con_form h1 {
-    font-size: 28px;
+
+.form_list_input {
+    width: 15vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_list_input li h1 {
+    font-size: 15px;
     font-weight: bold;
 }
-.form_list_input {
-    width: 254px;
-    height: 100%;
-    margin-top: 20px;
+
+.check-span {
+    height: 15px;
 }
-.form_list_input li {
-    height: 54px;
-}
+
 /***** INPUT *****/
 .form_list_input input {
     padding: 0 1em;
-    border: 0;
-    height: 38px;
+    border: none;
+    height: 4vh;
     width: 100%;
     border-radius: 30px;
+    margin-bottom: 5px;
 }
 .form_list_input input:focus {
     outline: none;
@@ -53,10 +67,11 @@
 .enter_btn {
     width: 100%;
     height: auto;
+    margin-top: 10px;
 }
 .enter_btn button {
     overflow: hidden;
-    width: 154px;
+    width: 130px;
     height: 40px;
     color: #efefef;
     background: #e96c7c;

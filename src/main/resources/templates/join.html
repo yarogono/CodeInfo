@@ -3,24 +3,42 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 <th:block layout:fragment="content">
-    <div class="user_form">
+    <form class="user_form" action="/api/user" method="POST" onsubmit="return checkForm();">
         <div class="main_con_form">
             <div class="form_inner">
-                <span><h1>회원가입</h1></span>
+                <span>
+                    <h1 class="form_inner-title">회원가입</h1>
+                </span>
                 <div>
                     <ul class="form_list_input">
-                        <li><input type="text" id="name_input" name="name_input"
-                                   minlength="3" placeholder="이름"></li>
-                        <li><input type="email" id="email_input" name="email_input" placeholder="이메일"></li>
-                        <li><input type="password" id="pw_input" name="pw_input"
-                                   minlength="4" placeholder="비밀번호"></li>
-                        <li><input type="password" id="pw_input2" name="pw_input2"
-                                   minlength="4" placeholder="비밀번호 확인"></li>
+                        <li>
+                            <input type="text" id="nickname_input" name="nickname_input"
+                                   minlength="3" maxlength="15"  placeholder="닉네임">
+                        </li>
+                        <div class="check-span">
+                            <span id="join_nickname_check"></span>
+                        </div>
+
+                        <li>
+                            <input type="password" id="pw_input" name="pw_input"
+                                   minlength="4" maxlength="15" placeholder="비밀번호">
+                        </li>
+                        <div class="check-span">
+                            <span id="join_pw_check"></span>
+                        </div>
+
+                        <li>
+                            <input type="password" id="pw_input2" name="pw_input2"
+                                   minlength="4" maxlength="15" placeholder="비밀번호 확인">
+                        </li>
+                        <div class="check-span">
+                            <span id="join_pw2_check"></span>
+                        </div>
                     </ul>
                 </div>
                 <div class="enter_btn"><button>가입 하기</button></div>
             </div>
         </div>
-    </div>
+    </form>
 </th:block>
 </html>

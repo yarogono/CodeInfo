@@ -3,21 +3,34 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 <th:block layout:fragment="content">
-    <div class="user_form">
+    <form action="/api/user" method="post" class="user_form">
         <div class="main_con_form">
             <div class="form_inner">
-                <span><h1>로그인</h1></span>
+                <span>
+                    <h1 class="form_inner-title">로그인</h1>
+                </span>
                 <div>
                     <ul class="form_list_input">
-                        <li><input type="email" id="email_input" name="email_input"
-                                   minlength="3" placeholder="이메일"></li>
-                        <li><input type="password" id="pw_input" name="pw_input"
-                                   minlength="4" placeholder="비밀번호"></li>
+                        <li>
+                            <input type="text" id="nickname_input" name="nickname_input"
+                                   minlength="3" maxlength="15" placeholder="닉네임">
+                        </li>
+                        <div class="check-span">
+                            <span id="login_nickname_check"></span>
+                        </div>
+
+                        <li>
+                            <input type="password" id="pw_input" name="pw_input"
+                                   minlength="4" maxlength="15" placeholder="비밀번호">
+                        </li>
+                        <div class="check-span">
+                            <span id="login_password_check"></span>
+                        </div>
                     </ul>
                 </div>
                 <div class="enter_btn"><button>로그인</button></div>
             </div>
         </div>
-    </div>
+    </form>
 </th:block>
 </html>
