@@ -3,10 +3,10 @@
 /* components */
 @import "components/nav.css";
 @import "components/footer.css";
+@import "components/userForm.css";
 
 /* Screens */
 @import "screens/board.css";
-@import "screens/userForm.css";
 @import "screens/upload.css";
 
 

@@ -35,6 +35,16 @@ function checkForm() {
         return false;
     }
 
+    if(USER_PW.value === NICKNAME.value) {
+        alert("닉네임과 비밀번호가 같습니다.");
+        USER_PW.value = "";
+        USER_PW2.value = "";
+        PW_CHECK.innerHTML = "";
+        PW2_CHECK.innerHTML = "";
+        NICKNAME.focus();
+        return false;
+    }
+
     if(!check(REGEX_NICKNAME, NICKNAME,"닉네임은 영어 대소문자, 숫자 포함 형태의 3~15자리입니다.")) {
         return false;
     }
@@ -59,12 +69,12 @@ function pwdEqualCheck() {
 function nickDuplicateCheck() {
     $.ajax({
         type: "POST",
-        url: "/join/nick/check_dup",
+        url: "/api/user/duplicate",
         data: {
             nickname_give: $(this).val()
         },
         success: function (response) {
-            if (response["exists"]) {
+            if (response) {
                 NICKNAME_CHECK.innerHTML = "이미 존재하는 닉네임입니다.";
                 NICKNAME_CHECK.style.color = "red";
                 NICKNAME.focus();
