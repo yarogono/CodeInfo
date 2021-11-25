@@ -1,6 +1,5 @@
 package com.hanghae.codeinfo.domain;
 
-import com.hanghae.codeinfo.dto.BoardRequestDto;
 import com.hanghae.codeinfo.utils.Timestamped;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,9 +39,8 @@ public class Board extends Timestamped {
         this.views = views;
     }
 
-    public void update(String title, String writer, String content) {
+    public void update(String title, String content) {
         this.title = title;
-        this.writer = writer;
         this.content = content;
     }
 

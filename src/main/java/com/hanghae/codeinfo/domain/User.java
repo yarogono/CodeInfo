@@ -5,7 +5,6 @@ import com.hanghae.codeinfo.utils.Timestamped;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.util.Assert;
 
 import javax.persistence.*;
 
@@ -25,13 +24,13 @@ public class User extends Timestamped {
     @Column(nullable = false)
     private String password;
 
+    @Column(unique = true)
+    private Long kakaoId;
 
     @Builder
     public User(String nickname, String password) {
-        Assert.notNull(nickname, "nickname이 null입니다.");
-        Assert.notNull(password, "password가 null입니다.");
-
         this.nickname = nickname;
         this.password = password;
+        this.kakaoId = null;
     }
 }

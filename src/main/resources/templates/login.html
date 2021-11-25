@@ -6,13 +6,12 @@
     <form action="/user/login" method="post" class="user_form">
         <div class="main_con_form">
             <div class="form_inner">
-                <span>
+                <div class="form_inner-title">
                     <h1 class="form_inner-title">로그인</h1>
-                </span>
-                <div>
+                </div>
                     <ul class="form_list_input">
                         <li>
-                            <input type="text" id="nickname_input" name="nickname_input"
+                            <input type="text" id="nickname" name="username"
                                    minlength="3" maxlength="15" placeholder="닉네임">
                         </li>
                         <div class="check-span">
@@ -20,14 +19,13 @@
                         </div>
 
                         <li>
-                            <input type="password" id="pw_input" name="pw_input"
+                            <input type="password" id="pw_input" name="password"
                                    minlength="4" maxlength="15" placeholder="비밀번호">
                         </li>
                         <div class="check-span">
                             <span id="login_password_check"></span>
                         </div>
                     </ul>
-                </div>
                 <div class="enter_btn"><button>로그인</button></div>
             </div>
         </div>

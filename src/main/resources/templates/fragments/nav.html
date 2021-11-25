@@ -16,9 +16,17 @@
             </div>
             <ul class="navbar__items">
                 <li class="navbar__item">
+                    <span th:text="${username}"></span>
+                </li>
+                <li class="navbar__item" th:if="${username!= null}">
+                    <form id="my_form" method="post" action="/user/logout">
+                        <a id="logout-text" href="javascript:{}" onclick="document.getElementById('my_form').submit();">로그아웃</a>
+                    </form>
+                </li>
+                <li class="navbar__item" th:if="${username == null}">
                     <a class="navbar__board__login" href="/user/login">로그인</a>
                 </li>
-                <li class="navbar__item">
+                <li class="navbar__item" th:if="${username == null}">
                     <a class="navbar__board__join" href="/user/join">회원가입</a>
                 </li>
             </ul>

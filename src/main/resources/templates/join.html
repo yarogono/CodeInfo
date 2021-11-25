@@ -3,39 +3,41 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 <th:block layout:fragment="content">
-    <form class="user_form" action="/user/join" method="POST" onsubmit="return checkForm();">
+    <form class="user_form" action="/user/join" method="POST"  th:object="${form}" onsubmit="return checkForm();">
         <div class="main_con_form">
             <div class="form_inner">
-                <span>
-                    <h1 class="form_inner-title">회원가입</h1>
-                </span>
-                <div>
-                    <ul class="form_list_input">
-                        <li>
-                            <input type="text" id="nickname_input" name="nickname_input"
-                                   minlength="3" maxlength="15"  placeholder="닉네임">
-                        </li>
-                        <div class="check-span">
-                            <span id="join_nickname_check"></span>
-                        </div>
-
-                        <li>
-                            <input type="password" id="pw_input" name="pw_input"
-                                   minlength="4" maxlength="15" placeholder="비밀번호">
-                        </li>
-                        <div class="check-span">
-                            <span id="join_pw_check"></span>
-                        </div>
-
-                        <li>
-                            <input type="password" id="pw_input2" name="pw_input2"
-                                   minlength="4" maxlength="15" placeholder="비밀번호 확인">
-                        </li>
-                        <div class="check-span">
-                            <span id="join_pw2_check"></span>
-                        </div>
-                    </ul>
+                <div class="form_inner-title">
+                    <h1>회원가입</h1>
                 </div>
+                    <ul class="form_list_input">
+                    <li>
+                        <input type="text" id="nickname" name="nickname"
+                               minlength="3" maxlength="15" class="nickname"  placeholder="닉네임"
+                               th:field="*{nickname}"
+                               th:class="${#fields.hasErrors('nickname')}? 'form-control fieldError' : 'form-control'">
+                    </li>
+                    <div class="check-span">
+                        <span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}"
+                              id="join_nickname_check"></span>
+                        <span id="nickname_check"></span>
+                    </div>
+
+                    <li>
+                        <input type="password" id="password" name="password"
+                               minlength="4" maxlength="15" placeholder="비밀번호">
+                    </li>
+                    <div class="check-span">
+                        <span id="join_pw_check"></span>
+                    </div>
+
+                    <li>
+                        <input type="password" id="password2" name="password2"
+                               minlength="4" maxlength="15" placeholder="비밀번호 확인">
+                    </li>
+                    <div class="check-span">
+                        <span id="join_pw2_check"></span>
+                    </div>
+                </ul>
                 <div class="enter_btn"><button>가입 하기</button></div>
             </div>
         </div>
