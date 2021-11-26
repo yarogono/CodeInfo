@@ -4,6 +4,7 @@ import com.hanghae.codeinfo.domain.Board;
 import com.hanghae.codeinfo.dto.BoardRequestDto;
 import com.hanghae.codeinfo.repository.BoardRepository;
 
+import com.hanghae.codeinfo.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,7 +26,8 @@ public class BoardService {
 
 
     public void getBoardListDesc(int page, Model model) {
-        Pageable boardPage = PageRequest.of(page, 5, Sort.by("no").descending());
+        Pageable boardPage = PageRequest.of(page, 5, Sort.by("postId").descending());
+
         Page<Board> boardList = boardRepository.findAll(boardPage);
 
         model.addAttribute("boardList", boardList);
@@ -49,10 +51,13 @@ public class BoardService {
         }
     }
 
-    public void upload(BoardRequestDto requestDto) {
+    public void upload(
+            BoardRequestDto requestDto,
+            UserDetailsImpl userDetails
+    ) {
         Board board = Board.builder()
                 .title(requestDto.getTitle())
-                .writer(requestDto.getWriter())
+                .writer(userDetails.getUsername())
                 .content(requestDto.getContent())
                 .build();
         boardRepository.save(board);

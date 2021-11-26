@@ -25,6 +25,7 @@ function checkRegex(regex, tag, message) {
 
 function checkForm() {
 
+
     if(USER_PW.value != USER_PW2.value) {
         alert("비밀번호가 다릅니다. 다시 입력해주세요.");
         USER_PW.value = "";
@@ -49,8 +50,12 @@ function checkForm() {
         return false;
     }
 
+    let isDuplicate = apiUserDuplicate($("#nickname").val())
+    if(!isDuplicate) {
+        alert("중복된 닉네임입니다.")
 
-
+        return false;
+    }
 }
 
 
@@ -71,6 +76,7 @@ function pwdEqualCheck() {
 
 function nickDuplicateCheck() {
 
+
     let inputNickname = $(this).val();
     const nicknameCheck = document.getElementById("join_nickname_check");
 
@@ -86,23 +92,25 @@ function nickDuplicateCheck() {
     }
 
     apiUserDuplicate(inputNickname);
-
 }
 
 function apiUserDuplicate(inputNickname) {
     const header = $("meta[name='_csrf_header']").attr('content');
     const token = $("meta[name='_csrf']").attr('content');
 
+    let isDuplicate = false;
+
     $.ajax({
         type: "post",
         url: "/api/user/duplicate",
         data: inputNickname,
+        async: false,
         contentType: "text/plain",
         beforeSend: function(xhr){
             xhr.setRequestHeader(header, token);
         },
         success: function (response) {
-            console.log(response);
+            isDuplicate = response
             if (response) {
                 NICKNAME_CHECK.innerHTML = "사용할 수 있는 닉네임입니다.";
                 NICKNAME_CHECK.style.color = "blue";
@@ -114,7 +122,7 @@ function apiUserDuplicate(inputNickname) {
         }
     });
 
-    return
+    return isDuplicate;
 }
 
 

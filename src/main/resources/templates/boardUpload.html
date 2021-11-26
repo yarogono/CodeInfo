@@ -5,7 +5,7 @@
 <th:block layout:fragment="content">
     <div class="upload">
         <div class="upload-container">
-            <form class="upload__form" action="/post" method = "post">
+            <form class="upload__form" action="/api/board" method = "post">
                 <div class="upload__input">
                     <div class="form-title">
                         <input type="text" class="upload-title" id="title"
@@ -13,9 +13,9 @@
                                minlength="1" maxlength="25" required>
                     </div>
                     <div class="form-writer">
-                        <input type="text" class="upload-writer" id="writer"
-                               name="writer" placeholder="작성자"
-                               minlength="1" maxlength=8 required>
+                        <span th:text="${username}" class="upload-writer" id="writer">
+                            작성자
+                        </span>
                     </div>
                     <div class="form-content">
                         <textarea type="text" class="upload-content" id="content" name="content"

@@ -1,5 +1,8 @@
 .board {
-    height: 100vh;
+    padding-top: 20vh;
+    margin-bottom: 10vh;
+    min-height: 90vh;
+    height: 100%;
 }
 
 .board-container {

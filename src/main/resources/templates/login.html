@@ -25,8 +25,16 @@
                         <div class="check-span">
                             <span id="login_password_check"></span>
                         </div>
+                        <div id="login-failed" style="display:none" class="alert alert-danger" role="alert">
+                            닉네임 또는 패스워드를 확인해주세요.
+                        </div>
                     </ul>
-                <div class="enter_btn"><button>로그인</button></div>
+                <div class="enter_btn">
+                    <button>로그인</button>
+                    <a onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=dc3057eec4b237169419d77675015bb0&redirect_uri=http://localhost:8080/user/kakao/callback&response_type=code'">
+                        <i class="fas fa-comment fa-2x"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </form>

@@ -16,7 +16,7 @@
             </div>
             <ul class="navbar__items">
                 <li class="navbar__item">
-                    <span th:text="${username}"></span>
+                    <span id="JSusername" th:text="${username}"></span>
                 </li>
                 <li class="navbar__item" th:if="${username!= null}">
                     <form id="my_form" method="post" action="/user/logout">

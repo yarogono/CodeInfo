@@ -11,11 +11,11 @@
         <div class="board__items">
           <div class="board__main">
             <div class="board__num">
-              <span th:text="${board.no}"></span>
+              <span th:text="${board.postId}"></span>
             </div>
             <div class="board__content">
               <div class="board__title">
-                <a th:href="@{/detail/__${board.no}__}" th:text="${board.title}">게시물 제목</a>
+                <a th:href="@{/detail/__${board.postId}__}" th:text="${board.title}">게시물 제목</a>
               </div>
               <div class="board__sub">
                 <div class="board__views">
@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="board__delete">
-            <button th:onclick="|javascript:deletePost('${board.no}')|">
+            <button th:onclick="|javascript:deletePost('${board.postId}')|">
               <i class="far fa-trash-alt fa-2x"></i>
             </button>
           </div>

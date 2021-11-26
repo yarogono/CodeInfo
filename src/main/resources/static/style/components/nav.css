@@ -5,6 +5,7 @@
     border-bottom-right-radius: 12px;
     position: fixed;
     width: 100%;
+    z-index: 99999;
 }
 
 .navbar__inner {

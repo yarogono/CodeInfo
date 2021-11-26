@@ -5,12 +5,12 @@
 <th:block layout:fragment="content">
     <div class="upload">
         <div class="upload-container">
-            <form class="upload__form" th:action="@{/detail/__${board.no}__}" method = "post">
+            <form class="upload__form" th:action="@{/detail/__${board.postId}__}" method = "post">
                 <input type="hidden" name="_method" value="PUT">
                 <div class="upload__input">
                     <div>
-                        <input type="checkbox" id="update-checkbox" name="scales">
-                        <label for="update-checkbox">수정하기</label>
+                        <input th:if="${board.writer == username}" type="checkbox" id="update-checkbox" name="scales">
+                        <label th:if="${board.writer == username}" for="update-checkbox">수정하기</label>
                     </div>
                     <div class="form-title">
                         <input type="text" class="upload-title" id="title"
@@ -18,9 +18,9 @@
                                minlength="1" maxlength="25" readonly>
                     </div>
                     <div class="form-writer">
-                        <input type="text" class="upload-writer" id="writer"
-                               name="writer" placeholder="작성자" th:value="${board.writer}"
-                               minlength="1" maxlength="15" readonly>
+                        <span class="upload-writer" id="writer" th:text="${board.writer}">
+                            작성자
+                        </span>
                     </div>
                     <div class="form-content">
                         <textarea type="text" class="upload-content" id="content" name="content"
@@ -28,11 +28,41 @@
                     </div>
                 </div>
                 <div class="form__btn">
-                    <button type="submit" class="upload-btn__write">수 정</button>
-                    <a class="upload-btn__cancel" href="/" style="color: white;" >취 소</a>
+                    <button th:if="${board.writer == username}"
+                            type="submit" class="upload-btn__write">수 정</button>
+                    <a th:if="${board.writer == username}"
+                            class="upload-btn__cancel" href="/" style="color: white;" >취 소</a>
                 </div>
             </form>
         </div>
+
+        <ul class="comments">
+            <li class="comment">
+                <div class="meta">
+                    <a id="JScomment-add" class="comment-submit">입력</a>
+                </div>
+                <textarea id="JScomment-textarea" type="text" class="comment-textarea"
+                          placeholder="댓글을 입력해주세요!"
+                          maxlength="385"></textarea>
+            </li>
+            <li class="comment" th:each="comment: ${comments}">
+                <div class="meta">
+                    <span class="comment-writer"
+                          th:text="${comment.writer}"></span>
+                    <span class="comment-time"
+                          th:text="${#temporals.format(comment.modifiedAt, '| yyyy-MM-dd HH:mm:ss')}" ></span>
+
+                    <div class="comment-setting">
+                        <a th:if="${comment.writer == username}"
+                           class="comment-update">수정</a>
+                        <a th:if="${comment.writer == username}"
+                           class="comment-delete"
+                           th:onclick="|javascript:deleteComment('${comment.commentId}')|">삭제</a>
+                    </div>
+                </div>
+                <div th:text="${comment.content}" class="comment-body"></div>
+            </li>
+        </ul>
     </div>
 </th:block>
 </html>

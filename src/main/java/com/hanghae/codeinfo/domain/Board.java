@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter // get 함수를 일괄적으로 만들어줍니다.
@@ -14,9 +16,9 @@ import javax.persistence.*;
 public class Board extends Timestamped {
 
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long no;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long postId;
 
     @Column(nullable = false)
     private String title;
@@ -29,6 +31,9 @@ public class Board extends Timestamped {
 
     @Column(columnDefinition = "integer default 0")
     private int views;
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+    private List<Comment> commentList = new ArrayList<>();
 
 
     @Builder

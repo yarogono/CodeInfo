@@ -1,5 +1,8 @@
 .user_form {
-    height: 100vh;
+    padding-top: 10vh;
+    margin-bottom: 10vh;
+    min-height: 90vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,9 +97,11 @@
     display: none;
 }
 .enter_btn {
-    display: flex;
-    justify-content: center;
+    width: 50%;
     margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .enter_btn button {
@@ -113,4 +118,40 @@
 
 .enter_btn button:hover {
     background-color: tomato;
+}
+
+
+.enter_btn a {
+    background-color: yellow;
+    border-radius: 8px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.enter_btn a:hover {
+    background-color: darkgoldenrod;
+    color: darkgray;
+}
+
+
+.alert {
+    position: absolute;
+    font-size: 27px;
+    background-color: rgba(248, 184, 154, 1);
+    color: white;
+    border-radius: 15px;
+    top: 15vh;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+                rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
