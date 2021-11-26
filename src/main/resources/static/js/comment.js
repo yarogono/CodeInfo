@@ -49,7 +49,7 @@ function deleteComment(commentId) {
         $.ajax({
             type: "DELETE",
             url: "/api/comment",
-            data: commentId,
+            data: JSON.stringify(commentId),
             contentType: "application/json",
             beforeSend: function(xhr){
                 xhr.setRequestHeader(HEADER, TOKEN);

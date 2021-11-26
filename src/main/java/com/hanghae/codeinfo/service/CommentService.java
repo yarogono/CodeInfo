@@ -58,7 +58,7 @@ public class CommentService {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다."));
 
-        if(userDetails.getUsername() != comment.getWriter()) {
+        if(!userDetails.getUsername().equals(comment.getWriter())) {
             return;
         }
         commentRepository.deleteById(commentId);
