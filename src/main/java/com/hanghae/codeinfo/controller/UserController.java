@@ -8,6 +8,7 @@ import com.hanghae.codeinfo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,10 +28,11 @@ public class UserController {
 
     @GetMapping("/user/login")
     public String loginPage(
-            @AuthenticationPrincipal UserDetailsImpl userDetails
+            @AuthenticationPrincipal UserDetailsImpl userDetails,
+            Model model
     ) {
-        if(userDetails != null) {
-            return "redirect:/";
+        if(userDetails != null ) {
+            throw new IllegalArgumentException("이미 로그인이 되어있습니다");
         }
 
         return "login";
@@ -44,8 +46,9 @@ public class UserController {
              @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
         if(userDetails != null) {
-            return "redirect:/";
+            throw new IllegalArgumentException("이미 로그인이 되어있습니다");
         }
+
         return "join";
     }
 
@@ -53,13 +56,9 @@ public class UserController {
     public String userJoin(
             @ModelAttribute("form")
             @Valid UserJoinRequestDto requestDto,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
-        // 테스트 케이스 사용 시 문제
-        if(bindingResult.hasErrors()){
-            return "join";
-        }
-
         Boolean isDuplicate = userService.userDuplicateCheck(requestDto.getNickname());
         if(!isDuplicate) {
             return "join";

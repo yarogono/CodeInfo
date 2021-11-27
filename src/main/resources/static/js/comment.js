@@ -39,6 +39,7 @@ function addComment() {
         },
         success: function () {
            COMMENT_TEXTAREA.value = "";
+            window.location.reload();
         }
     });
 }

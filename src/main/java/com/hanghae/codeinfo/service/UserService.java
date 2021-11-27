@@ -45,8 +45,8 @@ public class UserService {
         if(!(requestDto.getPassword().equals(requestDto.getPassword2()))) {
             return "비밀번호가 같지 않습니다.";
         }
-        // 정규표현식 일치 여부에 따른 에러
 
+        // 정규표현식 일치 여부에 따른 에러
         Optional<User> found = userRepository.findByNickname(requestDto.getNickname());
         if(found.isPresent()) {
             return "중복된 닉네임입니다.";
