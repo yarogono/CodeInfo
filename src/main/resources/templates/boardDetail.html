@@ -45,7 +45,7 @@
                           placeholder="댓글을 입력해주세요!"
                           maxlength="385"></textarea>
             </li>
-            <li class="comment" th:each="comment: ${comments}">
+            <li class="comment" th:id="'comment' + ${comment.commentId}" th:each="comment: ${comments}">
                 <div class="meta">
                     <span class="comment-writer"
                           th:text="${comment.writer}"></span>
@@ -53,14 +53,34 @@
                           th:text="${#temporals.format(comment.modifiedAt, '| yyyy-MM-dd HH:mm:ss')}" ></span>
 
                     <div class="comment-setting">
+
+                        <!-- 댓글 수정 submit -->
+                       <a  class="comment-edit-submit"
+                            th:id="'JScommentEditSubmit' + ${comment.commentId}"
+                            th:onclick="|javascript:updateCommentSubmit('${comment.commentId}')|" >
+                            <i class="fas fa-check fa-lg"></i>
+                        </a>
+
+                        <!-- 댓글 수정버튼 생성하는 버튼 -->
                         <a th:if="${comment.writer == username}"
-                           class="comment-update">수정</a>
-                        <a th:if="${comment.writer == username}"
-                           class="comment-delete"
-                           th:onclick="|javascript:deleteComment('${comment.commentId}')|">삭제</a>
+                           th:id="'JScommentEdit' + ${comment.commentId}"
+                           th:onclick="|javascript:updateBtnDisplayChg('${comment.commentId}')|"
+                           class="comment-edit">
+                            <i class="fas fa-edit fa-lg"></i>
+                        </a>
+
+                        <!-- 댓글 삭제버튼 -->
+                        <a th:if="${comment.writer == username}" class="comment-delete"
+                           th:onclick="|javascript:deleteComment('${comment.commentId}')|">
+                            <i class="fas fa-trash-alt fa-lg"></i>
+                        </a>
                     </div>
                 </div>
-                <div th:text="${comment.content}" class="comment-body"></div>
+                <div th:text="${comment.content}" class="comment-body"
+                     th:id="'JScommentBody' + ${comment.commentId}"></div>
+                <textarea type="text" class="comment-textarea update-textarea"
+                          placeholder="수정할 내용을 입력해주세요!"
+                          maxlength="385"></textarea>
             </li>
         </ul>
     </div>

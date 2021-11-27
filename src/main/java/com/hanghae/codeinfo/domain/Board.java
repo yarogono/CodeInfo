@@ -35,7 +35,6 @@ public class Board extends Timestamped {
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Comment> commentList = new ArrayList<>();
 
-
     @Builder
     public Board(String title, String writer, String content, int views) {
         this.title = title;

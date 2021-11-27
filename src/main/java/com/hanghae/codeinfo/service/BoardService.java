@@ -60,12 +60,13 @@ public class BoardService {
                 .writer(userDetails.getUsername())
                 .content(requestDto.getContent())
                 .build();
+
         boardRepository.save(board);
     }
 
     public void update(Long id, BoardRequestDto requestDto) {
         Board board = boardRepository.findById(id)
-                .orElse(null);
+                .orElseThrow(() -> new NullPointerException("해당 게시글이 없습니다."));
 
         board.update(
                 requestDto.getTitle(),

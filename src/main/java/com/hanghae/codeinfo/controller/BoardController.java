@@ -5,14 +5,12 @@ import com.hanghae.codeinfo.domain.Comment;
 import com.hanghae.codeinfo.dto.BoardRequestDto;
 import com.hanghae.codeinfo.security.UserDetailsImpl;
 import com.hanghae.codeinfo.service.BoardService;
-
 import com.hanghae.codeinfo.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

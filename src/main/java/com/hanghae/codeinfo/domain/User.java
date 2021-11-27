@@ -5,7 +5,6 @@ import com.hanghae.codeinfo.utils.Timestamped;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -28,6 +27,7 @@ public class User extends Timestamped {
     @Column(unique = true)
     private Long kakaoId;
 
+
     @Builder
     public User(String nickname, String password) {
         this.nickname = nickname;
@@ -36,7 +36,7 @@ public class User extends Timestamped {
     }
 
 
-    @Builder
+//    @Builder
     public User(String nickname, String password, Long kakaoId) {
         this.nickname = nickname;
         this.password = password;

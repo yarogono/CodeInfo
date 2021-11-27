@@ -1,5 +1,6 @@
 package com.hanghae.codeinfo.domain;
 
+import com.hanghae.codeinfo.dto.CommentRequestDto;
 import com.hanghae.codeinfo.utils.Timestamped;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,6 +32,10 @@ public class Comment extends Timestamped {
         this.writer = writer;
         this.content = content;
         this.board = board;
+    }
+
+    public void update(CommentRequestDto requestDto) {
+        this.content = requestDto.getContent();
     }
 }
 

@@ -63,4 +63,13 @@ public class CommentService {
         }
         commentRepository.deleteById(commentId);
     }
+
+    public void updateComment(CommentRequestDto requestDto) {
+        Comment comment = commentRepository.findById(requestDto.getCommentId())
+                .orElseThrow(() -> new NullPointerException("해당 댓글이 없습니다."));
+
+        comment.update(requestDto);
+
+        commentRepository.save(comment);
+    }
 }

@@ -8,11 +8,8 @@ import com.hanghae.codeinfo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.validation.BindingResult;
-
 import org.springframework.web.bind.annotation.*;
-
 
 import javax.validation.Valid;
 
@@ -58,6 +55,7 @@ public class UserController {
             @Valid UserJoinRequestDto requestDto,
             BindingResult bindingResult
     ) {
+        // 테스트 케이스 사용 시 문제
         if(bindingResult.hasErrors()){
             return "join";
         }

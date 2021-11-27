@@ -1,6 +1,5 @@
 package com.hanghae.codeinfo.controller;
 
-import com.hanghae.codeinfo.domain.Comment;
 import com.hanghae.codeinfo.dto.CommentRequestDto;
 import com.hanghae.codeinfo.security.UserDetailsImpl;
 import com.hanghae.codeinfo.service.CommentService;
@@ -20,7 +19,6 @@ public class CommentController {
 
 
     @PostMapping("/detail/{id}")
-    @ResponseBody
     public void addComment(
             @RequestBody CommentRequestDto requestDto,
             @PathVariable Long id
@@ -29,7 +27,6 @@ public class CommentController {
     }
 
     @DeleteMapping("/api/comment")
-    @ResponseBody
     public void deleteComment(
             @AuthenticationPrincipal UserDetailsImpl userDetails,
             @RequestBody Long commentId
@@ -38,10 +35,10 @@ public class CommentController {
     }
 
 
-//        @PutMapping("/api/board/comment")
-//    public Comment updateComment(
-//            CommentRequestDto requestDto
-//    ) {
-//
-//    }
+    @PutMapping("/api/board/comment")
+    public void updateComment(
+            @RequestBody CommentRequestDto requestDto
+    ) {
+        commentService.updateComment(requestDto);
+    }
 }

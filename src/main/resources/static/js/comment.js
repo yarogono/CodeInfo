@@ -5,6 +5,7 @@ const COMMENT_TEXTAREA = document.getElementById("JScomment-textarea");
 const HEADER = $("meta[name='_csrf_header']").attr('content');
 const TOKEN = $("meta[name='_csrf']").attr('content');
 
+
 function addComment() {
 
     let username = document.getElementById("JSusername");
@@ -62,9 +63,66 @@ function deleteComment(commentId) {
     }
 }
 
+function updateBtnDisplayChg(commentId) {
+    let comment = document.getElementById(`comment${commentId}`);
+    let commentTextArea = comment.childNodes[5];
+    let commentBodyText = comment.childNodes[3];
+    let meta = comment.childNodes[1];
+    let commentSetting = meta.childNodes[5];
+    let commentEditSubmit = commentSetting.childNodes[3];
+    let commentEdit = commentSetting.childNodes[7];
+
+    commentTextArea.style.display = "block";
+    commentBodyText.style.display = "none";
+    commentEditSubmit.style.display = "block";
+    commentEdit.style.display = "none";
+    commentTextArea.value = commentBodyText.innerHTML;
+}
+
+
+function updateCommentSubmit(commentId) {
+    let comment = document.getElementById(`comment${commentId}`);
+    let commentTextArea = comment.childNodes[5];
+    let commentBodyText = comment.childNodes[3];
+    let meta = comment.childNodes[1];
+    let commentSetting = meta.childNodes[5];
+    let commentEditSubmit = commentSetting.childNodes[3];
+    let commentEdit = commentSetting.childNodes[7];
+
+    if(commentTextArea.value == "") {
+        alert("내용을 입력 해주세요.");
+        return;
+    }
+
+    const header = $("meta[name='_csrf_header']").attr('content');
+    const token = $("meta[name='_csrf']").attr('content');
+
+    let result = {
+        commentId: commentId,
+        content: commentTextArea.value
+    }
+
+    $.ajax({
+        type: "PUT",
+        url: "/api/board/comment",
+        data: JSON.stringify(result),
+        contentType: "application/json",
+        beforeSend: function(xhr){
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (response) {
+            commentBodyText.innerHTML = commentTextArea.value;
+            commentTextArea.style.display = "none";
+            commentBodyText.style.display = "block";
+            commentEditSubmit.style.display = "none";
+            commentEdit.style.display = "block";
+        }
+    });
+}
+
 
 function init() {
-    COMMENT_ADD.addEventListener("click", addComment)
+    COMMENT_ADD.addEventListener("click", addComment);
 }
 
 init()
