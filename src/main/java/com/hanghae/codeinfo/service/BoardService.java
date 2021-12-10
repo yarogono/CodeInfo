@@ -1,6 +1,7 @@
 package com.hanghae.codeinfo.service;
 
 import com.hanghae.codeinfo.domain.Board;
+import com.hanghae.codeinfo.domain.Comment;
 import com.hanghae.codeinfo.dto.BoardRequestDto;
 import com.hanghae.codeinfo.repository.BoardRepository;
 
@@ -16,13 +17,15 @@ import org.springframework.ui.Model;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final CommentService commentService;
 
 
     public void getBoardListDesc(int page, Model model) {
@@ -149,5 +152,12 @@ public class BoardService {
     private void viewCountUp(Board board) {
         board.addViewCount(board);
         boardRepository.save(board);
+    }
+
+    public void views(Long id, Model model, HttpServletRequest request, HttpServletResponse response) {
+        Board board = viewCountUpAndCookieCheck(id, request, response);
+        List<Comment> comments = commentService.findAllComments(board);
+        model.addAttribute("board", board);
+        model.addAttribute("comments", comments);
     }
 }

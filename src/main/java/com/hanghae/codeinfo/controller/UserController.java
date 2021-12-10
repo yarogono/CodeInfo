@@ -5,34 +5,26 @@ import com.hanghae.codeinfo.dto.UserJoinRequestDto;
 import com.hanghae.codeinfo.security.UserDetailsImpl;
 import com.hanghae.codeinfo.service.KakaoUserService;
 import com.hanghae.codeinfo.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
     private final KakaoUserService kakaoUserService;
 
-    @Autowired
-    public UserController(UserService userService, KakaoUserService kakaoUserService) {
-        this.userService = userService;
-        this.kakaoUserService = kakaoUserService;
-    }
-
     @GetMapping("/user/login")
     public String loginPage(
-            @AuthenticationPrincipal UserDetailsImpl userDetails,
-            Model model
+            @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
         if(userDetails != null ) {
-            throw new IllegalArgumentException("이미 로그인이 되어있습니다");
+            throw new IllegalArgumentException("이미 로그인 되어있습니다");
         }
 
         return "login";
@@ -46,7 +38,7 @@ public class UserController {
              @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
         if(userDetails != null) {
-            throw new IllegalArgumentException("이미 로그인이 되어있습니다");
+            throw new IllegalArgumentException("이미 로그인 되어있습니다");
         }
 
         return "join";
@@ -55,9 +47,7 @@ public class UserController {
     @PostMapping("/user/join")
     public String userJoin(
             @ModelAttribute("form")
-            @Valid UserJoinRequestDto requestDto,
-            BindingResult bindingResult,
-            @AuthenticationPrincipal UserDetailsImpl userDetails
+            @Valid UserJoinRequestDto requestDto
     ) {
         Boolean isDuplicate = userService.userDuplicateCheck(requestDto.getNickname());
         if(!isDuplicate) {
@@ -74,13 +64,14 @@ public class UserController {
     public boolean userDuplicate(
             @RequestBody String nickname
     ) {
-        Boolean result = userService.userDuplicateCheck(nickname);
-        return result;
+        return userService.userDuplicateCheck(nickname);
     }
 
 
     @GetMapping("/user/kakao/callback")
-    public String kakaoLogin(@RequestParam String code) throws JsonProcessingException {
+    public String kakaoLogin(
+            @RequestParam String code
+    ) throws JsonProcessingException {
         kakaoUserService.kakaoLogin(code);
         return "redirect:/";
     }
