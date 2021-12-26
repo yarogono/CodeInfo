@@ -26,9 +26,6 @@ function deletePost(postNum) {
     }
 }
 
-
-
-
 function isChecked() {
     let titleInput = document.getElementById("title");
     let contentInput = document.getElementById("content");
