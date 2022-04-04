@@ -9,6 +9,7 @@ import com.hanghae.codeinfo.dto.KakaoUserInfoDto;
 import com.hanghae.codeinfo.repository.UserRepository;
 import com.hanghae.codeinfo.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -29,6 +30,13 @@ import java.util.UUID;
 public class KakaoUserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+
+    @Value("${kakao.client-id}")
+    private String clientId;
+
+    @Value("${kakao.redirect-uri}")
+    private String redirectUri;
+
 
     @Autowired
     public KakaoUserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -58,8 +66,8 @@ public class KakaoUserService {
         // HTTP Body 생성
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "authorization_code");
-        body.add("client_id", "dc3057eec4b237169419d77675015bb0");
-        body.add("redirect_uri", "http://3.38.93.241/user/kakao/callback");
+        body.add("client_id", clientId);
+        body.add("redirect_uri", redirectUri);
         body.add("code", code);
 
         // HTTP 요청 보내기
