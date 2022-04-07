@@ -6,6 +6,7 @@ import com.hanghae.codeinfo.dto.CommentRequestDto;
 import com.hanghae.codeinfo.repository.BoardRepository;
 import com.hanghae.codeinfo.repository.CommentRepository;
 import com.hanghae.codeinfo.security.UserDetailsImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,16 +17,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CommentService {
     private final CommentRepository commentRepository;
     private final BoardRepository boardRepository;
-
-    @Autowired
-    public CommentService(CommentRepository commentRepository, BoardRepository boardRepository) {
-        this.commentRepository = commentRepository;
-        this.boardRepository = boardRepository;
-    }
-
 
     public void addComment(CommentRequestDto requestDto, Long id) {
 

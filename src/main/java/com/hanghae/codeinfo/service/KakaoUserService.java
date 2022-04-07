@@ -8,6 +8,7 @@ import com.hanghae.codeinfo.domain.User;
 import com.hanghae.codeinfo.dto.KakaoUserInfoDto;
 import com.hanghae.codeinfo.repository.UserRepository;
 import com.hanghae.codeinfo.security.UserDetailsImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -27,6 +28,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class KakaoUserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
@@ -36,13 +38,6 @@ public class KakaoUserService {
 
     @Value("${kakao.redirect-uri}")
     private String redirectUri;
-
-
-    @Autowired
-    public KakaoUserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     public void kakaoLogin(String code) throws JsonProcessingException {
         // 1. "인가 코드"로 "액세스 토큰" 요청
