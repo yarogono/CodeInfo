@@ -70,8 +70,11 @@ public class BoardService {
     }
 
     public void update(Long id, BoardRequestDto requestDto) {
-        Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new NullPointerException("해당 게시글이 없습니다."));
+        Optional<Board> findBoard = boardRepository.findById(id);
+
+        boardValidCheck(findBoard);
+
+        Board board = findBoard.get();
 
         board.update(
                 requestDto.getTitle(),
@@ -83,9 +86,10 @@ public class BoardService {
 
     public void delete(Long id) {
         Optional<Board> board = boardRepository.findById(id);
-        if(board.isPresent()) {
-            boardRepository.deleteById(id);
-        }
+
+        boardValidCheck(board);
+
+        boardRepository.deleteById(id);
     }
 
 
@@ -96,9 +100,8 @@ public class BoardService {
             HttpServletResponse response
     ) {
         Optional<Board> findBoard = boardRepository.findById(id);
-        if(!findBoard.isPresent()) {
-           throw new NullPointerException("게시글이 없습니다.");
-        }
+        boardValidCheck(findBoard);
+
         Board board  = findBoard.get();
 
         // 클라이언트 쿠키 체크
@@ -167,5 +170,11 @@ public class BoardService {
         List<Comment> comments = commentService.findAllComments(board);
         model.addAttribute("board", board);
         model.addAttribute("comments", comments);
+    }
+
+    private void boardValidCheck(Optional<Board> board) {
+        if(!board.isPresent()) {
+            throw new NullPointerException("게시글이 없습니다.");
+        }
     }
 }
