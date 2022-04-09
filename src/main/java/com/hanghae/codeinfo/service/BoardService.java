@@ -18,6 +18,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -39,6 +40,7 @@ public class BoardService {
         int curPage = boardList.getNumber();
 
 
+        // ToDo: 로직을 수정해서 리팩토링 필요
         if(page == 0 && totalPages > 1) {
             model.addAttribute("nextPage", 1);
         } else {
@@ -80,7 +82,10 @@ public class BoardService {
 
 
     public void delete(Long id) {
-        boardRepository.deleteById(id);
+        Optional<Board> board = boardRepository.findById(id);
+        if(board.isPresent()) {
+            boardRepository.deleteById(id);
+        }
     }
 
 
@@ -90,8 +95,11 @@ public class BoardService {
             HttpServletRequest request,
             HttpServletResponse response
     ) {
-        Board board = boardRepository.findById(id)
-                .orElse(null);
+        Optional<Board> findBoard = boardRepository.findById(id);
+        if(!findBoard.isPresent()) {
+           throw new NullPointerException("게시글이 없습니다.");
+        }
+        Board board  = findBoard.get();
 
         // 클라이언트 쿠키 체크
         Cookie oldCookie =  clientCookieCheck(request);
