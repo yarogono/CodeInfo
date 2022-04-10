@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class CommentController {
     private final CommentService commentService;
 
-    @PostMapping("/detail/{id}")
+    @PostMapping("/board/{id}")
     public void addComment(
             @RequestBody CommentRequestDto requestDto,
             @PathVariable Long id
@@ -21,7 +21,7 @@ public class CommentController {
         commentService.addComment(requestDto, id);
     }
 
-    @DeleteMapping("/api/comment")
+    @DeleteMapping("/comment")
     public void deleteComment(
             @AuthenticationPrincipal UserDetailsImpl userDetails,
             @RequestBody Long commentId
@@ -30,7 +30,7 @@ public class CommentController {
     }
 
 
-    @PutMapping("/api/board/comment")
+    @PutMapping("/board/comment")
     public void updateComment(
             @RequestBody CommentRequestDto requestDto
     ) {

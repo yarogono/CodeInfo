@@ -28,6 +28,7 @@ public class BoardController {
             Model model,
             @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
+
         if(userDetails != null) {
             model.addAttribute("username", userDetails.getUsername());
         }
@@ -48,7 +49,7 @@ public class BoardController {
 
 
     // 게시글 상세 페이지
-    @GetMapping("/detail/{id}")
+    @GetMapping("/board/{id}")
     public String boardDetailPage(
             @PathVariable Long id,
             Model model,
@@ -66,7 +67,7 @@ public class BoardController {
 
 
     // 게시글 업로드 페이지
-    @GetMapping("/upload")
+    @GetMapping("/board/upload")
     public String boardUploadPage(
             @AuthenticationPrincipal UserDetailsImpl userDetails,
             Model model
@@ -88,7 +89,7 @@ public class BoardController {
 
 
     // 게시글 삭제
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/board/{id}")
     @ResponseBody
     public Long deletePost(@PathVariable Long id) {
         boardService.delete(id);
@@ -97,7 +98,7 @@ public class BoardController {
 
 
     // 게시글 수정
-    @PutMapping("/detail/{id}")
+    @PutMapping("/board/{id}")
     public String boardUpdate(
             @PathVariable Long id,
             BoardRequestDto requestDto

@@ -59,7 +59,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/api/user/duplicate")
+    @PostMapping("/user/duplicate")
     @ResponseBody
     public boolean userDuplicate(
             @RequestBody String nickname
