@@ -56,7 +56,7 @@ public class BoardService {
         }
     }
 
-    public void upload(
+    public void boardUpload(
             BoardRequestDto requestDto,
             UserDetailsImpl userDetails
     ) {
@@ -69,7 +69,7 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-    public void update(Long id, BoardRequestDto requestDto) {
+    public void boardUpdate(Long id, BoardRequestDto requestDto) {
         Optional<Board> findBoard = boardRepository.findById(id);
 
         boardValidCheck(findBoard);
@@ -84,7 +84,7 @@ public class BoardService {
     };
 
 
-    public void delete(Long id) {
+    public void boardDelete(Long id) {
         Optional<Board> board = boardRepository.findById(id);
 
         boardValidCheck(board);
@@ -116,13 +116,13 @@ public class BoardService {
             if(!hadVisitedCheck) {
                 oldCookieValueAdd(id, oldCookie, response);
 
-                viewCountUp(board);
+                boardViewCountUp(board);
             }
         } else {
             // 새로운 쿠키 추가
             giveNewCookie(id, response);
 
-            viewCountUp(board);
+            boardViewCountUp(board);
         }
         return board;
     }
@@ -160,12 +160,12 @@ public class BoardService {
         response.addCookie(newCookie);
     }
 
-    private void viewCountUp(Board board) {
+    private void boardViewCountUp(Board board) {
         board.addViewCount(board);
         boardRepository.save(board);
     }
 
-    public void views(Long id, Model model, HttpServletRequest request, HttpServletResponse response) {
+    public void boardViews(Long id, Model model, HttpServletRequest request, HttpServletResponse response) {
         Board board = viewCountUpAndCookieCheck(id, request, response);
         List<Comment> comments = commentService.findAllComments(board);
         model.addAttribute("board", board);

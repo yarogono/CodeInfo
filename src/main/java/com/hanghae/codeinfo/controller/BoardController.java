@@ -57,7 +57,7 @@ public class BoardController {
             HttpServletResponse response,
             @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
-        boardService.views(id, model, request, response);
+        boardService.boardViews(id, model, request, response);
         if(userDetails != null) {
             model.addAttribute("username", userDetails.getUsername());
         }
@@ -83,7 +83,7 @@ public class BoardController {
             BoardRequestDto requestDto,
              @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
-        boardService.upload(requestDto, userDetails);
+        boardService.boardUpload(requestDto, userDetails);
         return "redirect:/";
     }
 
@@ -91,8 +91,8 @@ public class BoardController {
     // 게시글 삭제
     @DeleteMapping("/board/{id}")
     @ResponseBody
-    public Long deletePost(@PathVariable Long id) {
-        boardService.delete(id);
+    public Long boardDelete(@PathVariable Long id) {
+        boardService.boardDelete(id);
         return id;
     }
 
@@ -103,7 +103,7 @@ public class BoardController {
             @PathVariable Long id,
             BoardRequestDto requestDto
     ) {
-        boardService.update(id, requestDto);
+        boardService.boardUpdate(id, requestDto);
         return "redirect:/";
     }
 
