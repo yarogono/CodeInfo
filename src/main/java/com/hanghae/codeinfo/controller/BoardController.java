@@ -78,7 +78,7 @@ public class BoardController {
 
 
     // 게시글 업로드
-    @PostMapping("/api/board")
+    @PostMapping("/board/upload")
     public String boardUpload(
             BoardRequestDto requestDto,
              @AuthenticationPrincipal UserDetailsImpl userDetails
