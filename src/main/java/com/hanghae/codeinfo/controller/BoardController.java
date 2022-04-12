@@ -98,7 +98,7 @@ public class BoardController {
 
 
     // 게시글 수정
-    @PutMapping("/board/{id}")
+    @PutMapping("/board/update/{id}")
     public String boardUpdate(
             @PathVariable Long id,
             BoardRequestDto requestDto
