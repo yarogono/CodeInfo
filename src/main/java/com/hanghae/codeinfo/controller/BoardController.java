@@ -13,16 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-//@RequiredArgsConstructor
-// 초기화 되지 않은 final 필드나, @NotNull 이 붙은 필드에대해 생성자를 생성해줍니다.
-// 주로 의존성 주입(Dependency Injection) 편의성을 위해 사용
 @Controller
 @RequiredArgsConstructor
 public class BoardController {
 
     private final BoardService boardService;
 
-    // 메인페이지
     @GetMapping("/")
     public String boardListPage(
             Model model,
@@ -36,8 +32,6 @@ public class BoardController {
         return "boardList";
     }
 
-
-    // 메인페이지 페이징
     @GetMapping("/{page}")
     public String boardListPaging(
             @PathVariable int page,
@@ -47,8 +41,6 @@ public class BoardController {
         return "boardList";
     }
 
-
-    // 게시글 상세 페이지
     @GetMapping("/board/{id}")
     public String boardDetailPage(
             @PathVariable Long id,
@@ -65,8 +57,6 @@ public class BoardController {
         return "boardDetail";
     }
 
-
-    // 게시글 업로드 페이지
     @GetMapping("/board/upload")
     public String boardUploadPage(
             @AuthenticationPrincipal UserDetailsImpl userDetails,
@@ -77,7 +67,6 @@ public class BoardController {
     }
 
 
-    // 게시글 업로드
     @PostMapping("/board/upload")
     public String boardUpload(
             BoardRequestDto requestDto,
@@ -87,8 +76,6 @@ public class BoardController {
         return "redirect:/";
     }
 
-
-    // 게시글 삭제
     @DeleteMapping("/board/{id}")
     @ResponseBody
     public Long boardDelete(@PathVariable Long id) {
@@ -96,8 +83,6 @@ public class BoardController {
         return id;
     }
 
-
-    // 게시글 수정
     @PutMapping("/board/update/{id}")
     public String boardUpdate(
             @PathVariable Long id,
