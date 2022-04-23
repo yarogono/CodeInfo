@@ -76,11 +76,12 @@ public class BoardService {
 
         Board board = findBoard.get();
 
-        board.update(
-                requestDto.getTitle(),
-                requestDto.getContent()
-        );
-        boardRepository.save(board);
+//        board.update(
+//                requestDto.getTitle(),
+//                requestDto.getContent()
+//        );
+//        boardRepository.save(board);
+        boardRepository.updateBoard(board.getPostId(), requestDto.getTitle(), requestDto.getContent());
     };
 
 
