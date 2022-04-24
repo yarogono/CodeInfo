@@ -1,6 +1,6 @@
 package com.hanghae.codeinfo.security;
 
-import com.hanghae.codeinfo.domain.User;
+import com.hanghae.codeinfo.model.User;
 import com.hanghae.codeinfo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

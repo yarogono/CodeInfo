@@ -4,12 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.hanghae.codeinfo.domain.User;
+import com.hanghae.codeinfo.model.User;
 import com.hanghae.codeinfo.dto.KakaoUserInfoDto;
 import com.hanghae.codeinfo.repository.UserRepository;
 import com.hanghae.codeinfo.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

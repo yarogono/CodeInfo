@@ -1,4 +1,4 @@
-package com.hanghae.codeinfo.domain;
+package com.hanghae.codeinfo.model;
 
 import com.hanghae.codeinfo.utils.Timestamped;
 import lombok.Builder;

@@ -1,6 +1,6 @@
 package com.hanghae.codeinfo.repository;
 
-import com.hanghae.codeinfo.domain.User;
+import com.hanghae.codeinfo.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

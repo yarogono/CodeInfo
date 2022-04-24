@@ -1,6 +1,6 @@
 package com.hanghae.codeinfo.service;
 
-import com.hanghae.codeinfo.domain.User;
+import com.hanghae.codeinfo.model.User;
 import com.hanghae.codeinfo.dto.UserJoinRequestDto;
 import com.hanghae.codeinfo.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;

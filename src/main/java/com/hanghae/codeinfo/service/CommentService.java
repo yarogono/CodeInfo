@@ -1,13 +1,12 @@
 package com.hanghae.codeinfo.service;
 
-import com.hanghae.codeinfo.domain.Board;
-import com.hanghae.codeinfo.domain.Comment;
+import com.hanghae.codeinfo.model.Board;
+import com.hanghae.codeinfo.model.Comment;
 import com.hanghae.codeinfo.dto.CommentRequestDto;
 import com.hanghae.codeinfo.repository.BoardRepository;
 import com.hanghae.codeinfo.repository.CommentRepository;
 import com.hanghae.codeinfo.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

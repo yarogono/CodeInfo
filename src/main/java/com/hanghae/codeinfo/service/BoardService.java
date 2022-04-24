@@ -1,7 +1,7 @@
 package com.hanghae.codeinfo.service;
 
-import com.hanghae.codeinfo.domain.Board;
-import com.hanghae.codeinfo.domain.Comment;
+import com.hanghae.codeinfo.model.Board;
+import com.hanghae.codeinfo.model.Comment;
 import com.hanghae.codeinfo.dto.BoardRequestDto;
 import com.hanghae.codeinfo.repository.BoardRepository;
 

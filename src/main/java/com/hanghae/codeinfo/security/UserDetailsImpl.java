@@ -1,6 +1,6 @@
 package com.hanghae.codeinfo.security;
 
-import com.hanghae.codeinfo.domain.User;
+import com.hanghae.codeinfo.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
