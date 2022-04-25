@@ -2,6 +2,7 @@ package com.hanghae.codeinfo.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hanghae.codeinfo.dto.UserJoinRequestDto;
+import com.hanghae.codeinfo.exception.ExceptionMessages;
 import com.hanghae.codeinfo.security.UserDetailsImpl;
 import com.hanghae.codeinfo.service.KakaoUserService;
 import com.hanghae.codeinfo.service.UserService;
@@ -24,7 +25,7 @@ public class UserController {
             @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
         if(userDetails != null ) {
-            throw new IllegalArgumentException("이미 로그인 되어있습니다");
+            throw new IllegalArgumentException(ExceptionMessages.ALLREADY_LOGIN);
         }
 
         return "login";
@@ -38,7 +39,7 @@ public class UserController {
              @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
         if(userDetails != null) {
-            throw new IllegalArgumentException("이미 로그인 되어있습니다");
+            throw new IllegalArgumentException(ExceptionMessages.ALLREADY_LOGIN);
         }
 
         return "join";
