@@ -1,11 +1,10 @@
 package com.hanghae.codeinfo.service;
 
-import com.hanghae.codeinfo.domain.Board;
 import com.hanghae.codeinfo.dto.BoardRequestDto;
+import com.hanghae.codeinfo.model.Board;
 import com.hanghae.codeinfo.repository.BoardRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
 import javax.transaction.Transactional;
