@@ -72,14 +72,14 @@ public class BoardController {
             BoardRequestDto requestDto,
              @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
-        boardService.boardUpload(requestDto, userDetails);
+        boardService.saveBoard(requestDto, userDetails);
         return "redirect:/";
     }
 
     @DeleteMapping("/board/{id}")
     @ResponseBody
     public Long boardDelete(@PathVariable Long id) {
-        boardService.boardDelete(id);
+        boardService.deleteBoard(id);
         return id;
     }
 
@@ -88,7 +88,7 @@ public class BoardController {
             @PathVariable Long id,
             BoardRequestDto requestDto
     ) {
-        boardService.boardUpdate(id, requestDto);
+        boardService.updateBoard(id, requestDto);
         return "redirect:/";
     }
 

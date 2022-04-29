@@ -1,5 +1,6 @@
 package com.hanghae.codeinfo.service;
 
+import com.hanghae.codeinfo.exception.ExceptionMessages;
 import com.hanghae.codeinfo.model.Board;
 import com.hanghae.codeinfo.model.Comment;
 import com.hanghae.codeinfo.dto.BoardRequestDto;
@@ -56,7 +57,7 @@ public class BoardService {
         }
     }
 
-    public void boardUpload(
+    public void saveBoard(
             BoardRequestDto requestDto,
             UserDetailsImpl userDetails
     ) {
@@ -69,7 +70,7 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-    public void boardUpdate(Long id, BoardRequestDto requestDto) {
+    public void updateBoard(Long id, BoardRequestDto requestDto) {
         Optional<Board> findBoard = boardRepository.findById(id);
 
         boardValidCheck(findBoard);
@@ -85,7 +86,7 @@ public class BoardService {
     };
 
 
-    public void boardDelete(Long id) {
+    public void deleteBoard(Long id) {
         Optional<Board> board = boardRepository.findById(id);
 
         boardValidCheck(board);
@@ -175,7 +176,7 @@ public class BoardService {
 
     private void boardValidCheck(Optional<Board> board) {
         if(!board.isPresent()) {
-            throw new NullPointerException("게시글이 없습니다.");
+            throw new NullPointerException(ExceptionMessages.BOARD_IS_NULL);
         }
     }
 }
