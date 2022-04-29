@@ -10,4 +10,11 @@ public final class ExceptionMessages {
     public static String ILLEGAL_PWD_LENGTH = "비밀번호는 4자이상의 비밀번호여야 합니다.";
 
     public static String ALLREADY_LOGIN = "이미 로그인 되어있습니다";
+
+
+    // Board
+    public static String BOARD_IS_NULL = "게시글이 없습니다.";
+
+    // Comment
+    public static String COMMENT_IS_NULL = "해당 댓글이 없습니다.";
 }

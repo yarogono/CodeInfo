@@ -1,8 +1,9 @@
 package com.hanghae.codeinfo.service;
 
+import com.hanghae.codeinfo.dto.CommentRequestDto;
+import com.hanghae.codeinfo.exception.ExceptionMessages;
 import com.hanghae.codeinfo.model.Board;
 import com.hanghae.codeinfo.model.Comment;
-import com.hanghae.codeinfo.dto.CommentRequestDto;
 import com.hanghae.codeinfo.repository.BoardRepository;
 import com.hanghae.codeinfo.repository.CommentRepository;
 import com.hanghae.codeinfo.security.UserDetailsImpl;
@@ -24,7 +25,9 @@ public class CommentService {
     public void addComment(CommentRequestDto requestDto, Long id) {
 
         Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new UsernameNotFoundException("Can't find "));
+                .orElseThrow(
+                        () -> new UsernameNotFoundException(ExceptionMessages.BOARD_IS_NULL)
+                );
 
         Comment comment = Comment.builder()
                 .writer(requestDto.getWriter())
@@ -49,21 +52,30 @@ public class CommentService {
             Long commentId,
             UserDetailsImpl userDetails
     ) {
-        Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다."));
+        Comment comment = findCommentByBoardId(commentId);
 
         if(!userDetails.getUsername().equals(comment.getWriter())) {
             return;
         }
+
         commentRepository.deleteById(commentId);
     }
 
     public void updateComment(CommentRequestDto requestDto) {
-        Comment comment = commentRepository.findById(requestDto.getCommentId())
-                .orElseThrow(() -> new NullPointerException("해당 댓글이 없습니다."));
+
+        Comment comment = findCommentByBoardId(requestDto.getCommentId());
 
         comment.update(requestDto);
 
         commentRepository.save(comment);
+    }
+
+    private Comment findCommentByBoardId(Long commentId) {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(
+                        () -> new NullPointerException(ExceptionMessages.COMMENT_IS_NULL)
+                );
+
+        return comment;
     }
 }
