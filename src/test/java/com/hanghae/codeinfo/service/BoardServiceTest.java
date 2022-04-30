@@ -55,28 +55,41 @@ class BoardServiceTest {
     @Test
     @DisplayName("게시글 1개 저장")
     void 게시글_저장() {
+        // given
         BoardRequestDto boardRequestDto = BoardRequestDto.builder()
                                         .title("testTitle")
                                         .content("testContent")
                                         .build();
 
+        // when
         boardService.saveBoard(boardRequestDto, userDetails);
+
+        // then
+
     }
 
     @Test
     @DisplayName("게시글 1개 삭제")
     void 게시글_삭제() {
+
+        // when
         boardService.deleteBoard(board.getPostId());
+
+        // then
     }
 
     @Test
     @DisplayName("게시글 1개 수정")
     void 게시글_수정() {
+        // given
         BoardRequestDto boardRequestDto = BoardRequestDto.builder()
                                                         .title("modifyTitle")
                                                         .content("modifyContent")
                                                         .build();
-        boardService.updateBoard(board.getPostId(), boardRequestDto);
-    }
 
+        // when
+        boardService.updateBoard(board.getPostId(), boardRequestDto);
+
+        // then
+    }
 }
