@@ -69,4 +69,14 @@ class BoardServiceTest {
         boardService.deleteBoard(board.getPostId());
     }
 
+    @Test
+    @DisplayName("게시글 1개 수정")
+    void 게시글_수정() {
+        BoardRequestDto boardRequestDto = BoardRequestDto.builder()
+                                                        .title("modifyTitle")
+                                                        .content("modifyContent")
+                                                        .build();
+        boardService.updateBoard(board.getPostId(), boardRequestDto);
+    }
+
 }
