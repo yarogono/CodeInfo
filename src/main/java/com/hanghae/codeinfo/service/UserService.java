@@ -68,9 +68,9 @@ public class UserService {
     public boolean userDuplicateCheck(String nickname) {
 
         boolean isEmpty = false;
-        User found = userRepository.findByNickname(nickname)
-                .orElse(null);
-        if(found == null) {
+        Optional<User> findUser = userRepository.findByNickname(nickname);
+
+        if(!findUser.isPresent()) {
             isEmpty = true;
         }
         return isEmpty;
