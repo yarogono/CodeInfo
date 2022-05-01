@@ -1,5 +1,6 @@
 package com.hanghae.codeinfo.service;
 
+import com.hanghae.codeinfo.exception.ExceptionMessages;
 import com.hanghae.codeinfo.model.User;
 import com.hanghae.codeinfo.dto.UserJoinRequestDto;
 import com.hanghae.codeinfo.repository.UserRepository;
@@ -29,7 +30,7 @@ class UserServiceTest {
 
     @DisplayName("회원 가입 아이디 중복검사 / 성공")
     @Test
-    void test1() {
+    void 아이디_중복검사_성공() {
         // given
         UserJoinRequestDto requestDto = new UserJoinRequestDto(
                 "Q1w2",
@@ -49,7 +50,7 @@ class UserServiceTest {
 
     @DisplayName("회원 가입 아이디 중복검사 / 실패")
     @Test
-    void test2() {
+    void 아이디_중복검사_실패() {
         // given
         UserJoinRequestDto requestDto = new UserJoinRequestDto(
                 "Q1w2",
@@ -68,12 +69,12 @@ class UserServiceTest {
         String exception = userService.userJoin(requestDto);
 
         // then
-        assertEquals("중복된 닉네임입니다.", exception);
+        assertEquals(ExceptionMessages.NICKNAME_DUPLICATE, exception);
     }
 
     @DisplayName("비밀번호 확인 == 비밀번호 / 성공")
     @Test
-    void test3() {
+    void 비밀번호_확인_성공() {
         // given
         UserJoinRequestDto requestDto = new UserJoinRequestDto(
                 "Q1w2",
@@ -96,7 +97,7 @@ class UserServiceTest {
 
     @DisplayName("비밀번호 확인 == 비밀번호 / 실패")
     @Test
-    void test4() {
+    void 비밀번호_확인_실패() {
         // given
         UserJoinRequestDto requestDto = new UserJoinRequestDto(
                 "Q1w2",
@@ -113,13 +114,13 @@ class UserServiceTest {
         String exception = userService.userJoin(requestDto);
 
         // then
-        assertEquals("비밀번호가 같지 않습니다.", exception);
+        assertEquals(ExceptionMessages.PWD_ARE_NOT_SAME, exception);
     }
 
 
     @DisplayName("비밀번호 최소 4자 이상 / 실패")
     @Test
-    void test5() {
+    void 비밀번호_글자수_실패() {
         // given
         UserJoinRequestDto requestDto = new UserJoinRequestDto(
                 "Q1w2",
@@ -142,7 +143,7 @@ class UserServiceTest {
 
     @DisplayName("비밀번호 닉네임과 같은 값 / 실패")
     @Test
-    void test6() {
+    void 비밀번호_닉네임_같은지검사_실패() {
         // given
         UserJoinRequestDto requestDto = new UserJoinRequestDto(
                 "qwer",
@@ -165,7 +166,7 @@ class UserServiceTest {
 
     @DisplayName("닉네임 알파벳 대소문자, 숫자 / 실패")
     @Test
-    void test7() {
+    void 닉네임_알파벳_대소문자_숫자_검사_실패() {
         // given
         UserJoinRequestDto requestDto = new UserJoinRequestDto(
                 "q1w2e3",
@@ -188,7 +189,7 @@ class UserServiceTest {
 
     @DisplayName("닉네임 3글자 이상 / 실패")
     @Test
-    void test9() {
+    void 닉네임_3글자_이상_실패() {
         // given
         UserJoinRequestDto requestDto = new UserJoinRequestDto(
                 "Q1",
