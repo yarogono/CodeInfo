@@ -9,7 +9,10 @@ import com.hanghae.codeinfo.security.UserDetailsImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -22,15 +25,16 @@ import javax.transaction.Transactional;
 @Transactional
 @Rollback
 @SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class BoardServiceTest {
 
-    @SpyBean
-    private BoardRepository boardRepository;
-
-    @Autowired
+    @Mock
     private BoardService boardService;
 
-    @Autowired
+    @Mock
+    private BoardRepository boardRepository;
+
+    @Mock
     private UserRepository userRepository;
 
     private Board board;
