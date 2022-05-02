@@ -9,8 +9,10 @@ import com.hanghae.codeinfo.security.UserDetailsImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.annotation.Rollback;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +24,7 @@ import javax.transaction.Transactional;
 @SpringBootTest
 class BoardServiceTest {
 
-    @Autowired
+    @SpyBean
     private BoardRepository boardRepository;
 
     @Autowired
