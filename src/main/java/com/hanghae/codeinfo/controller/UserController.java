@@ -21,7 +21,7 @@ public class UserController {
     private final KakaoUserService kakaoUserService;
 
     @GetMapping("/user/login")
-    public String loginPage(
+    public String userLoginPage(
             @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
         if(userDetails != null ) {
@@ -34,7 +34,7 @@ public class UserController {
 
 
     @GetMapping("/user/join")
-    public String joinPage(
+    public String userJoinPage(
             @ModelAttribute("form") UserJoinRequestDto requestDto,
              @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @PostMapping("/user/join")
-    public String userJoin(
+    public String saveUser(
             @ModelAttribute("form")
             @Valid UserJoinRequestDto requestDto
     ) {
@@ -55,7 +55,7 @@ public class UserController {
             return "join";
         }
 
-        userService.userJoin(requestDto);
+        userService.saveUser(requestDto);
         return "redirect:/user/login";
     }
 

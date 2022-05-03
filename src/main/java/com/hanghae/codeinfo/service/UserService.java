@@ -18,7 +18,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    public String userJoin(UserJoinRequestDto requestDto) {
+    public String saveUser(UserJoinRequestDto requestDto) {
 
         //닉네임에 같은 값이 포함되어있으면 에러내기, indexof가 -1 이면 안에 포함이 안돼있는것
         if(requestDto.getPassword().indexOf(requestDto.getNickname())!=-1) {
