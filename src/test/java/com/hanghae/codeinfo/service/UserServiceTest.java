@@ -1,9 +1,12 @@
 package com.hanghae.codeinfo.service;
 
 import com.hanghae.codeinfo.exception.ExceptionMessages;
+import com.hanghae.codeinfo.model.Board;
 import com.hanghae.codeinfo.model.User;
 import com.hanghae.codeinfo.dto.UserJoinRequestDto;
 import com.hanghae.codeinfo.repository.UserRepository;
+import com.hanghae.codeinfo.security.UserDetailsImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,10 +25,24 @@ import static org.mockito.Mockito.when;
 class UserServiceTest {
 
     @Mock
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Mock
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
+
+    @Mock
+    private UserService userService;
+
+
+    @BeforeEach
+    void before() {
+        User user = User.builder()
+                        .nickname("Q1w2")
+                        .password("qwer")
+                        .build();
+
+        userRepository.save(user);
+    }
 
 
     @DisplayName("회원 가입 아이디 중복검사 / 성공")
@@ -33,15 +50,15 @@ class UserServiceTest {
     void 아이디_중복검사_성공() {
         // given
         UserJoinRequestDto requestDto = new UserJoinRequestDto(
-                "Q1w2",
+                "Q1w3",
                 "qwer",
                 "qwer"
         );
-        UserService userService = new UserService(passwordEncoder, userRepository);
 
         // when
         String exception = userService.userJoin(requestDto);
 
+        System.out.println(exception);
 
         // then
         assertEquals("회원가입이 완료되었습니다.", exception);
