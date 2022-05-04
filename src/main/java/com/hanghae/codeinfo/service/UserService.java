@@ -36,19 +36,19 @@ public class UserService {
         }
 
 
-        String patternid = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{3,}$";
+        String patternId = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{3,}$";
         String ids = requestDto.getNickname();
-        String patternpw = ".{4,}";
+        String patterNpw = ".{4,}";
         String pws = requestDto.getPassword();
-        boolean regexid = Pattern.matches(patternid, ids);
+        boolean regexId = Pattern.matches(patternId, ids);
         // 아아디 조건 일치여부
-        if(regexid==false) {
+        if(regexId == false) {
             throw new IllegalArgumentException(ExceptionMessages.ILLEGAL_NICKNAME_PWD);
         }
 
-        boolean regexpw = Pattern.matches(patternpw, pws);
+        boolean regexPw = Pattern.matches(patterNpw, pws);
         // 비밀번호 조건 일치여부
-        if(regexpw==false) {
+        if(regexPw == false) {
             throw new IllegalArgumentException(ExceptionMessages.ILLEGAL_PWD_LENGTH);
         }
 
@@ -56,7 +56,7 @@ public class UserService {
         String password = passwordEncoder.encode(requestDto.getPassword());
 
 
-        User user = new User().builder()
+        User user = User.builder()
                 .nickname(requestDto.getNickname())
                 .password(password)
                 .build();
