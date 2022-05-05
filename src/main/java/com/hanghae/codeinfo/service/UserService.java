@@ -18,7 +18,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    public String saveUser(UserJoinRequestDto requestDto) {
+    public void saveUser(UserJoinRequestDto requestDto) {
 
         //닉네임에 같은 값이 포함되어있으면 에러내기, indexof가 -1 이면 안에 포함이 안돼있는것
         if(requestDto.getPassword().indexOf(requestDto.getNickname())!=-1) {
@@ -61,7 +61,6 @@ public class UserService {
                 .password(password)
                 .build();
         userRepository.save(user);
-        return "회원가입이 완료되었습니다.";
     }
 
 
