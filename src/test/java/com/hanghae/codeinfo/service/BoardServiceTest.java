@@ -6,23 +6,28 @@ import com.hanghae.codeinfo.model.User;
 import com.hanghae.codeinfo.repository.BoardRepository;
 import com.hanghae.codeinfo.repository.UserRepository;
 import com.hanghae.codeinfo.security.UserDetailsImpl;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(value = MethodOrderer.OrderAnnotation.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BoardServiceTest {
 
-    @Mock
+    @Autowired
     private BoardService boardService;
 
-    @Mock
+    @Autowired
     private BoardRepository boardRepository;
 
-    @Mock
+    @Autowired
     private UserRepository userRepository;
 
     private Board board;
@@ -61,7 +66,7 @@ class BoardServiceTest {
         boardService.saveBoard(boardRequestDto, userDetails);
 
         // then
-
+        assertEquals("test", "test");
     }
 
     @Test

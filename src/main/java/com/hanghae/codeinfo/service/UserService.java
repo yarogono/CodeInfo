@@ -67,12 +67,12 @@ public class UserService {
 
     public boolean userDuplicateCheck(String nickname) {
 
-        boolean isEmpty = false;
         Optional<User> findUser = userRepository.findByNickname(nickname);
 
-        if(!findUser.isPresent()) {
-            isEmpty = true;
+        if(findUser.isPresent()) {
+            throw new IllegalArgumentException(ExceptionMessages.NICKNAME_DUPLICATE);
         }
-        return isEmpty;
+
+        return false;
     }
 }
