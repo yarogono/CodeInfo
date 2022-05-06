@@ -15,9 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@ExtendWith(MockitoExtension.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@TestMethodOrder(value = MethodOrderer.OrderAnnotation.class)
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+//@TestMethodOrder(value = MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BoardServiceTest {
 
