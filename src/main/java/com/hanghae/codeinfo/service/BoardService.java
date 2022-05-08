@@ -70,12 +70,11 @@ public class BoardService {
         boardRepository.save(board);
     }
 
+
     public void updateBoard(Long id, BoardRequestDto requestDto) {
         Optional<Board> findBoard = boardRepository.findById(id);
 
-        boardValidCheck(findBoard);
-
-        Board board = findBoard.get();
+        Board board = boardValidCheck(findBoard);
 
         Long boardId = board.getPostId();
         String boardTitle = board.getTitle();
@@ -86,11 +85,13 @@ public class BoardService {
 
 
     public void deleteBoard(Long id) {
-        Optional<Board> board = boardRepository.findById(id);
+        Optional<Board> findBoard = boardRepository.findById(id);
 
-        boardValidCheck(board);
+        Board board = boardValidCheck(findBoard);
 
-        boardRepository.deleteById(id);
+        Long boardId = board.getPostId();
+
+        boardRepository.deleteById(boardId);
     }
 
 
@@ -101,9 +102,7 @@ public class BoardService {
             HttpServletResponse response
     ) {
         Optional<Board> findBoard = boardRepository.findById(id);
-        boardValidCheck(findBoard);
-
-        Board board  = findBoard.get();
+        Board board = boardValidCheck(findBoard);
 
         // 클라이언트 쿠키 체크
         Cookie oldCookie =  clientCookieCheck(request);
@@ -173,9 +172,10 @@ public class BoardService {
         model.addAttribute("comments", comments);
     }
 
-    private void boardValidCheck(Optional<Board> board) {
+    private Board boardValidCheck(Optional<Board> board) {
         if(!board.isPresent()) {
             throw new NullPointerException(ExceptionMessages.BOARD_IS_NULL);
         }
+        return board.get();
     }
 }
