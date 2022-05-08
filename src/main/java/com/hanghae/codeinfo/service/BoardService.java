@@ -173,7 +173,7 @@ public class BoardService {
     }
 
     private Board boardValidCheck(Optional<Board> board) {
-        if(!board.isPresent()) {
+        if(board.isEmpty()) {
             throw new NullPointerException(ExceptionMessages.BOARD_IS_NULL);
         }
         return board.get();
