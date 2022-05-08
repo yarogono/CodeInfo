@@ -1,0 +1,28 @@
+spring:
+  h2:
+    console:
+      enabled: true  # H2 웹 콘솔을 사용하겠다는 의미
+      path: /h2-console  # 콘솔의 경로
+
+  datasource:
+    driver-class-name: org.h2.Driver  #h2 드라이버 설정
+    url: ENC(oStZitqGwYf6gEWFLLXMkob2hT25j+5UUYtISvqZfCk=)  #접속 URL
+    username: ENC(5mmK/IDPL6RK1DwvYCfsnw==)  # 사용자 이름 (로그인 시 사용)
+    password: ENC(GLpkJ0eQO/Ni1dEGCt+RVg==)  # 사용자 암호 (로그인 시 사용)
+
+  devtools:
+    livereload:
+      enabled: true
+  freemarker:
+    cache: false
+
+  jpa:
+    show-sql: true
+
+kakao:
+  client-id: ENC(JwfIX/fSf+HLy5sKuPp3AFC8mA0t8N8ew6YzJR+7pMQ10bGV1HurXN28MWJopCc8)
+  redirect-uri: ENC(2jWs8REgJlrJXYU+gVFqhwi+YKDi68o5Y+BY8oIYU8JZ0lngIx02sSxVx3o/WaFi)
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
