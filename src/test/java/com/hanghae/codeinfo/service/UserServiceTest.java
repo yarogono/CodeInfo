@@ -1,27 +1,19 @@
 package com.hanghae.codeinfo.service;
 
 import com.hanghae.codeinfo.exception.ExceptionMessages;
-import com.hanghae.codeinfo.model.Board;
 import com.hanghae.codeinfo.model.User;
-import com.hanghae.codeinfo.dto.UserJoinRequestDto;
 import com.hanghae.codeinfo.repository.UserRepository;
-import com.hanghae.codeinfo.security.UserDetailsImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -30,7 +22,7 @@ class UserServiceTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Mock
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired

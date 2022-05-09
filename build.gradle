@@ -43,4 +43,5 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    systemProperty "jasypt.encryptor.password", System.getProperties().get("jasypt.encryptor.password")
 }
