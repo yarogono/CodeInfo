@@ -58,7 +58,7 @@ public class BoardController {
     }
 
     @GetMapping("/board/upload")
-    public String boardUploadPage(
+    public String boardSavePage(
             @AuthenticationPrincipal UserDetailsImpl userDetails,
             Model model
     ) {
@@ -68,7 +68,7 @@ public class BoardController {
 
 
     @PostMapping("/board/upload")
-    public String boardUpload(
+    public String saveBoard(
             BoardRequestDto requestDto,
              @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
@@ -78,13 +78,13 @@ public class BoardController {
 
     @DeleteMapping("/board/{id}")
     @ResponseBody
-    public Long boardDelete(@PathVariable Long id) {
+    public Long deleteBoard(@PathVariable Long id) {
         boardService.deleteBoard(id);
         return id;
     }
 
     @PutMapping("/board/update/{id}")
-    public String boardUpdate(
+    public String updateBoard(
             @PathVariable Long id,
             BoardRequestDto requestDto
     ) {

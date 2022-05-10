@@ -62,7 +62,6 @@ class BoardServiceTest {
         boardService.saveBoard(boardRequestDto, userDetails);
 
         // then
-        assertEquals("test", "test");
     }
 
     @Test
