@@ -181,7 +181,7 @@ public class BoardService {
     }
 
     private void loginCheck(UserDetailsImpl userDetails) {
-        if(!userDetails.isEnabled()) {
+        if(userDetails == null) {
             throw new NullPointerException(ExceptionMessages.USERDETAILS_IS_NULL);
         }
     }

@@ -1,6 +1,7 @@
 package com.hanghae.codeinfo.service;
 
 import com.hanghae.codeinfo.dto.BoardRequestDto;
+import com.hanghae.codeinfo.exception.ExceptionMessages;
 import com.hanghae.codeinfo.model.Board;
 import com.hanghae.codeinfo.model.User;
 import com.hanghae.codeinfo.repository.BoardRepository;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 class BoardServiceTest {
@@ -50,8 +52,8 @@ class BoardServiceTest {
     }
 
     @Test
-    @DisplayName("게시글 1개 저장")
-    void 게시글_저장() {
+    @DisplayName("게시글 1개 저장 / 성공")
+    void 게시글_저장_성공() {
         // given
         BoardRequestDto boardRequestDto = BoardRequestDto.builder()
                                         .title("testTitle")
@@ -63,6 +65,27 @@ class BoardServiceTest {
 
         // then
     }
+
+    @Test
+    @DisplayName("게시글 1개 저장 / 실패")
+    void 게시글_저장_실패() {
+        // given
+        BoardRequestDto boardRequestDto = BoardRequestDto.builder()
+                                        .title("testTitle")
+                                        .content("testContent")
+                                        .build();
+
+        userDetails = null;
+
+        // when
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            boardService.saveBoard(boardRequestDto, userDetails);
+        });
+
+        // then
+        assertEquals(ExceptionMessages.USERDETAILS_IS_NULL, exception.getMessage());
+    }
+
 
     @Test
     @DisplayName("게시글 1개 삭제")
