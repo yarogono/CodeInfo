@@ -69,7 +69,7 @@ class BoardServiceTest {
     void 게시글_삭제() {
 
         // when
-        boardService.deleteBoard(board.getPostId());
+        boardService.deleteBoard(board.getPostId(), userDetails);
 
         // then
     }
@@ -84,7 +84,7 @@ class BoardServiceTest {
                                                         .build();
 
         // when
-        boardService.updateBoard(board.getPostId(), boardRequestDto);
+        boardService.updateBoard(board.getPostId(), boardRequestDto, userDetails);
 
         // then
     }

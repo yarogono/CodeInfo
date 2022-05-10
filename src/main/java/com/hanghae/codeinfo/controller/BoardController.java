@@ -78,17 +78,18 @@ public class BoardController {
 
     @DeleteMapping("/board/{id}")
     @ResponseBody
-    public Long deleteBoard(@PathVariable Long id) {
-        boardService.deleteBoard(id);
+    public Long deleteBoard(@PathVariable Long id, UserDetailsImpl userDetails) {
+        boardService.deleteBoard(id, userDetails);
         return id;
     }
 
     @PutMapping("/board/update/{id}")
     public String updateBoard(
             @PathVariable Long id,
-            BoardRequestDto requestDto
+            BoardRequestDto requestDto,
+            UserDetailsImpl userDetails
     ) {
-        boardService.updateBoard(id, requestDto);
+        boardService.updateBoard(id, requestDto, userDetails);
         return "redirect:/";
     }
 

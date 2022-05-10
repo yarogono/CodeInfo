@@ -61,6 +61,9 @@ public class BoardService {
             BoardRequestDto requestDto,
             UserDetailsImpl userDetails
     ) {
+
+        loginCheck(userDetails);
+
         Board board = Board.builder()
                 .title(requestDto.getTitle())
                 .writer(userDetails.getUsername())
@@ -71,7 +74,10 @@ public class BoardService {
     }
 
 
-    public void updateBoard(Long id, BoardRequestDto requestDto) {
+    public void updateBoard(Long id, BoardRequestDto requestDto, UserDetailsImpl userDetails) {
+
+        loginCheck(userDetails);
+
         Optional<Board> findBoard = boardRepository.findById(id);
 
         Board board = boardValidCheck(findBoard);
@@ -84,7 +90,9 @@ public class BoardService {
     };
 
 
-    public void deleteBoard(Long id) {
+    public void deleteBoard(Long id, UserDetailsImpl userDetails) {
+        loginCheck(userDetails);
+
         Optional<Board> findBoard = boardRepository.findById(id);
 
         Board board = boardValidCheck(findBoard);
@@ -170,6 +178,12 @@ public class BoardService {
         List<Comment> comments = commentService.findAllComments(board);
         model.addAttribute("board", board);
         model.addAttribute("comments", comments);
+    }
+
+    private void loginCheck(UserDetailsImpl userDetails) {
+        if(!userDetails.isEnabled()) {
+            throw new NullPointerException(ExceptionMessages.USERDETAILS_IS_NULL);
+        }
     }
 
     private Board boardValidCheck(Optional<Board> board) {
