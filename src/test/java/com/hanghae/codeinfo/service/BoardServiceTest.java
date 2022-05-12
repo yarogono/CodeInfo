@@ -88,8 +88,8 @@ class BoardServiceTest {
 
 
     @Test
-    @DisplayName("게시글 1개 삭제")
-    void 게시글_삭제() {
+    @DisplayName("게시글 1개 삭제 / 성공")
+    void 게시글_삭제_성공() {
 
         // when
         boardService.deleteBoard(board.getPostId(), userDetails);
@@ -98,8 +98,30 @@ class BoardServiceTest {
     }
 
     @Test
-    @DisplayName("게시글 1개 수정")
-    void 게시글_수정() {
+    @DisplayName("게시글 1개 삭제 / 실패")
+    void 게시글_삭제_실패() {
+        // given
+        BoardRequestDto boardRequestDto = BoardRequestDto.builder()
+                .title("testTitle")
+                .content("testContent")
+                .build();
+
+        userDetails = null;
+
+        // when
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            boardService.deleteBoard(board.getPostId(), userDetails);
+        });
+
+        // then
+        assertEquals(ExceptionMessages.USERDETAILS_IS_NULL, exception.getMessage());
+    }
+
+
+
+    @Test
+    @DisplayName("게시글 1개 수정 / 성공")
+    void 게시글_수정_성공() {
         // given
         BoardRequestDto boardRequestDto = BoardRequestDto.builder()
                                                         .title("modifyTitle")
@@ -110,5 +132,26 @@ class BoardServiceTest {
         boardService.updateBoard(board.getPostId(), boardRequestDto, userDetails);
 
         // then
+    }
+
+    @Test
+    @DisplayName("게시글 1개 수정 / 실패")
+    void 게시글_수정_실패() {
+
+        BoardRequestDto boardRequestDto = BoardRequestDto.builder()
+                .title("modifyTitle")
+                .content("modifyContent")
+                .build();
+
+            userDetails = null;
+
+        // when
+
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            boardService.updateBoard(board.getPostId(), boardRequestDto, userDetails);
+        });
+
+        // then
+        assertEquals(ExceptionMessages.USERDETAILS_IS_NULL, exception.getMessage());
     }
 }
