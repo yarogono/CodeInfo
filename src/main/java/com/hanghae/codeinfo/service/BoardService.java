@@ -169,8 +169,11 @@ public class BoardService {
     }
 
     private void boardViewCountUp(Board board) {
-        board.addViewCount(board);
-        boardRepository.save(board);
+
+        Long boardId = board.getPostId();
+        int boardViews = board.getViews();
+
+        boardRepository.viewCountUp(boardId, boardViews);
     }
 
     public void boardViews(Long id, Model model, HttpServletRequest request, HttpServletResponse response) {

@@ -37,10 +37,4 @@ public class Board extends Timestamped {
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Comment> commentList = new ArrayList<>();
-
-    public void addViewCount(Board board) {
-        this.views = board.getViews() + 1;
-    }
-
-
 }
