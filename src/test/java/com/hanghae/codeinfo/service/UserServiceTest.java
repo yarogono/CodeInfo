@@ -6,8 +6,6 @@ import com.hanghae.codeinfo.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@ExtendWith(MockitoExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UserServiceTest {
 
@@ -59,12 +56,10 @@ class UserServiceTest {
 //    @Test
 //    void 아이디_중복검사_성공() {
 //        // given, when
-//        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-//            userService.userDuplicateCheck(nicknameSecond);
-//        });
+//        Boolean result = userService.userDuplicateCheck(nicknameSecond);
 //
 //        // then
-//        assertEquals(ExceptionMessages.NICKNAME_DUPLICATE, exception.getMessage());
+//        assertEquals(false, result);
 //    }
 
 //    @DisplayName("비밀번호 확인 == 비밀번호 / 성공")
