@@ -29,13 +29,13 @@ class UserServiceTest {
     @Autowired
     private UserService userService;
 
-    private String nicknameFirst = "Q1w2";
-    private String nicknameSecond = "Q1w3";
+    private String userIdFirst = "Q1w2";
+    private String userIdSecond = "Q1w3";
 
     @BeforeEach
     void before() {
         User user = User.builder()
-                        .nickname(nicknameFirst)
+                        .nickname(userIdFirst)
                         .password("qwer")
                         .build();
 
@@ -48,7 +48,7 @@ class UserServiceTest {
     void 아이디_중복검사_실패() {
         // given, when
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            userService.userDuplicateCheck(nicknameFirst);
+            userService.userDuplicateCheck(userIdFirst);
         });
 
         // then
@@ -60,7 +60,7 @@ class UserServiceTest {
     @Test
     void 아이디_중복검사_성공() {
         // given, when
-        Boolean result = userService.userDuplicateCheck(nicknameSecond);
+        Boolean result = userService.userDuplicateCheck(userIdSecond);
 
         // then
         assertEquals(false, result);
@@ -74,10 +74,6 @@ class UserServiceTest {
                 "Q1w6",
                 "qwer",
                 "qwer"
-        );
-        User user = new User(
-                requestDto.getNickname(),
-                requestDto.getPassword()
         );
 
         // when

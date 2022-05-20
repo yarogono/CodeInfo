@@ -19,7 +19,7 @@ public class User extends Timestamped {
     private Long id;
 
     @Column(nullable = false)
-    private String nickname;
+    private String userId;
 
     @Column(nullable = false)
     private String password;
@@ -30,7 +30,7 @@ public class User extends Timestamped {
 
     @Builder
     public User(String nickname, String password) {
-        this.nickname = nickname;
+        this.userId = nickname;
         this.password = password;
         this.kakaoId = null;
     }
@@ -38,7 +38,7 @@ public class User extends Timestamped {
 
 //    @Builder
     public User(String nickname, String password, Long kakaoId) {
-        this.nickname = nickname;
+        this.userId = nickname;
         this.password = password;
         this.kakaoId = kakaoId;
     }

@@ -20,8 +20,9 @@ public class UserService {
 
     public String saveUser(UserJoinRequestDto requestDto) {
 
+
         //닉네임에 같은 값이 포함되어있으면 에러내기, indexof가 -1 이면 안에 포함이 안돼있는것
-        if(requestDto.getPassword().indexOf(requestDto.getNickname())!=-1) {
+        if(requestDto.getPassword().indexOf(requestDto.getUserId())!=-1) {
             throw new IllegalArgumentException(ExceptionMessages.NICKNAME_AND_PWD_SAME);
         }
         // 입력된 비밀 번호 값이 같지 않으면 회원가입 불가
@@ -30,25 +31,25 @@ public class UserService {
         }
 
         // 정규표현식 일치 여부에 따른 에러
-        Optional<User> found = userRepository.findByNickname(requestDto.getNickname());
+        Optional<User> found = userRepository.findByNickname(requestDto.getUserId());
         if(found.isPresent()) {
             throw new IllegalArgumentException(ExceptionMessages.NICKNAME_DUPLICATE);
         }
 
 
         String patternId = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{3,}$";
-        String ids = requestDto.getNickname();
+        String ids = requestDto.getUserId();
         String patterNpw = ".{4,}";
         String pws = requestDto.getPassword();
         boolean regexId = Pattern.matches(patternId, ids);
         // 아아디 조건 일치여부
-        if(regexId == false) {
+        if(!regexId) {
             throw new IllegalArgumentException(ExceptionMessages.ILLEGAL_NICKNAME_PWD);
         }
 
         boolean regexPw = Pattern.matches(patterNpw, pws);
         // 비밀번호 조건 일치여부
-        if(regexPw == false) {
+        if(!regexPw) {
             throw new IllegalArgumentException(ExceptionMessages.ILLEGAL_PWD_LENGTH);
         }
 
@@ -57,7 +58,7 @@ public class UserService {
 
 
         User user = User.builder()
-                .nickname(requestDto.getNickname())
+                .nickname(requestDto.getUserId())
                 .password(password)
                 .build();
         userRepository.save(user);
