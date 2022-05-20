@@ -50,7 +50,7 @@ public class UserController {
             @ModelAttribute("form")
             @Valid UserJoinRequestDto requestDto
     ) {
-        Boolean isDuplicate = userService.userDuplicateCheck(requestDto.getNickname());
+        Boolean isDuplicate = userService.userDuplicateCheck(requestDto.getUserId());
         if(!isDuplicate) {
             return "join";
         }

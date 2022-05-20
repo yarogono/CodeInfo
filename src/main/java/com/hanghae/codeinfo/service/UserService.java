@@ -31,7 +31,7 @@ public class UserService {
         }
 
         // 정규표현식 일치 여부에 따른 에러
-        Optional<User> found = userRepository.findByNickname(requestDto.getUserId());
+        Optional<User> found = userRepository.findByUserId(requestDto.getUserId());
         if(found.isPresent()) {
             throw new IllegalArgumentException(ExceptionMessages.NICKNAME_DUPLICATE);
         }
@@ -66,9 +66,9 @@ public class UserService {
     }
 
 
-    public boolean userDuplicateCheck(String nickname) {
+    public boolean userDuplicateCheck(String userId) {
 
-        Optional<User> findUser = userRepository.findByNickname(nickname);
+        Optional<User> findUser = userRepository.findByUserId(userId);
 
         if(findUser.isPresent()) {
             throw new IllegalArgumentException(ExceptionMessages.NICKNAME_DUPLICATE);
