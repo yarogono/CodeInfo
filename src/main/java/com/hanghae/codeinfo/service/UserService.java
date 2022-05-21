@@ -20,18 +20,22 @@ public class UserService {
 
     public String saveUser(UserJoinRequestDto requestDto) {
 
+        String userId = requestDto.getUserId();
+
+        String userPassword = requestDto.getPassword();
+        String userPassword2 = requestDto.getPassword2();
 
         //닉네임에 같은 값이 포함되어있으면 에러내기, indexof가 -1 이면 안에 포함이 안돼있는것
-        if(requestDto.getPassword().indexOf(requestDto.getUserId())!=-1) {
+        if(userPassword.contains(userId)) {
             throw new IllegalArgumentException(ExceptionMessages.NICKNAME_AND_PWD_SAME);
         }
         // 입력된 비밀 번호 값이 같지 않으면 회원가입 불가
-        if(!(requestDto.getPassword().equals(requestDto.getPassword2()))) {
+        if(!(userPassword.equals(userPassword2))) {
             throw new IllegalArgumentException(ExceptionMessages.PWD_ARE_NOT_SAME);
         }
 
         // 정규표현식 일치 여부에 따른 에러
-        Optional<User> found = userRepository.findByUserId(requestDto.getUserId());
+        Optional<User> found = userRepository.findByUserId(userId);
         if(found.isPresent()) {
             throw new IllegalArgumentException(ExceptionMessages.NICKNAME_DUPLICATE);
         }
@@ -58,7 +62,7 @@ public class UserService {
 
 
         User user = User.builder()
-                .nickname(requestDto.getUserId())
+                .nickname(userId)
                 .password(password)
                 .build();
         userRepository.save(user);
