@@ -25,37 +25,11 @@ public class UserService {
         String userPassword = requestDto.getPassword();
         String userPassword2 = requestDto.getPassword2();
 
-        //닉네임에 같은 값이 포함되어있으면 에러내기, indexof가 -1 이면 안에 포함이 안돼있는것
-        if(userPassword.contains(userId)) {
-            throw new IllegalArgumentException(ExceptionMessages.NICKNAME_AND_PWD_SAME);
-        }
-        // 입력된 비밀 번호 값이 같지 않으면 회원가입 불가
-        if(!(userPassword.equals(userPassword2))) {
-            throw new IllegalArgumentException(ExceptionMessages.PWD_ARE_NOT_SAME);
-        }
+        // 유저아이디 중복 체크
+        findUserByUserId(userId);
 
-        // 정규표현식 일치 여부에 따른 에러
-        Optional<User> found = userRepository.findByUserId(userId);
-        if(found.isPresent()) {
-            throw new IllegalArgumentException(ExceptionMessages.NICKNAME_DUPLICATE);
-        }
-
-
-        String patternId = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{3,}$";
-        String ids = requestDto.getUserId();
-        String patterNpw = ".{4,}";
-        String pws = requestDto.getPassword();
-        boolean regexId = Pattern.matches(patternId, ids);
-        // 아아디 조건 일치여부
-        if(!regexId) {
-            throw new IllegalArgumentException(ExceptionMessages.ILLEGAL_NICKNAME_PWD);
-        }
-
-        boolean regexPw = Pattern.matches(patterNpw, pws);
-        // 비밀번호 조건 일치여부
-        if(!regexPw) {
-            throw new IllegalArgumentException(ExceptionMessages.ILLEGAL_PWD_LENGTH);
-        }
+        // 회원가입 유효성 검사
+        userValidationCheck(userId, userPassword, userPassword2);
 
         // 패스워드 암호화
         String password = passwordEncoder.encode(requestDto.getPassword());
@@ -72,12 +46,41 @@ public class UserService {
 
     public boolean userDuplicateCheck(String userId) {
 
-        Optional<User> findUser = userRepository.findByUserId(userId);
-
-        if(findUser.isPresent()) {
-            throw new IllegalArgumentException(ExceptionMessages.NICKNAME_DUPLICATE);
-        }
+        findUserByUserId(userId);
 
         return false;
+    }
+
+    private void findUserByUserId(String userId) {
+        Optional<User> found = userRepository.findByUserId(userId);
+        if(found.isPresent()) {
+            throw new IllegalArgumentException(ExceptionMessages.NICKNAME_DUPLICATE);
+        }
+    }
+
+    private void userValidationCheck(String userId, String userPassword, String userPassword2) {
+        // 닉네임에 같은 값이 포함되어있으면 에러발생
+        if(userPassword.contains(userId)) {
+            throw new IllegalArgumentException(ExceptionMessages.NICKNAME_AND_PWD_SAME);
+        }
+        // 입력된 비밀 번호 값이 같지 않으면 회원가입 불가
+        if(!(userPassword.equals(userPassword2))) {
+            throw new IllegalArgumentException(ExceptionMessages.PWD_ARE_NOT_SAME);
+        }
+
+        String patternId = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{3,}$";
+        String patterNpw = ".{4,}";
+
+        boolean regexId = Pattern.matches(patternId, userId);
+        // 아아디 조건 일치여부
+        if(!regexId) {
+            throw new IllegalArgumentException(ExceptionMessages.ILLEGAL_NICKNAME_PWD);
+        }
+
+        boolean regexPw = Pattern.matches(patterNpw, userPassword);
+        // 비밀번호 조건 일치여부
+        if(!regexPw) {
+            throw new IllegalArgumentException(ExceptionMessages.ILLEGAL_PWD_LENGTH);
+        }
     }
 }

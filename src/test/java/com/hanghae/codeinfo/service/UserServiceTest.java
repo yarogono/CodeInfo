@@ -29,8 +29,8 @@ class UserServiceTest {
     @Autowired
     private UserService userService;
 
-    private String userIdFirst = "Q1w2";
-    private String userIdSecond = "Q1w3";
+    private String userIdFirst = "Test1";
+    private String userIdSecond = "Test2";
 
     @BeforeEach
     void before() {
@@ -71,7 +71,7 @@ class UserServiceTest {
     void 회원가입_성공() {
         // given
         UserJoinRequestDto requestDto = new UserJoinRequestDto(
-                "Q1w6",
+                userIdSecond,
                 "qwer",
                 "qwer"
         );
@@ -89,7 +89,7 @@ class UserServiceTest {
     void 비밀번호_확인_실패() {
         // given
         UserJoinRequestDto userJoinRequestDto = new UserJoinRequestDto(
-                "Q1w2",
+                userIdSecond,
                 "qwerrrr",
                 "qwer"
         );
@@ -109,7 +109,7 @@ class UserServiceTest {
     void 비밀번호_글자수_실패() {
         // given
         UserJoinRequestDto userJoinRequestDto = new UserJoinRequestDto(
-                "Q1w7",
+                userIdSecond,
                 "qwe",
                 "qwe"
         );
@@ -129,9 +129,9 @@ class UserServiceTest {
     void 비밀번호_닉네임_같은지검사_실패() {
         // given
         UserJoinRequestDto userJoinRequestDto = new UserJoinRequestDto(
-                "qwer",
-                "qwer",
-                "qwer"
+                userIdSecond,
+                userIdSecond,
+                userIdSecond
         );
 
         // when
