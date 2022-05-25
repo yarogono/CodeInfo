@@ -1,32 +1,32 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>오류</title>
-    <link rel='stylesheet' href='/webjars/bootstrap/4.5.0/css/bootstrap.min.css'>
-    <script>
-        if(("[[${exception}]]"=="")) {
-            top.alert("로그인이 필요합니다");
-            location.href="/user/login"
-        }
-        else if(("[[${exception}]]"=="이미 로그인이 되어있습니다")||("[[${exception}]]"=="댓글 내용을 입력해주세요")){
-            top.alert("[[${exception}]]");
-            location.href="/"
-        }
+<!--<!DOCTYPE html>-->
+<!--<html lang="ko" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>오류</title>-->
+<!--    <link rel='stylesheet' href='/webjars/bootstrap/4.5.0/css/bootstrap.min.css'>-->
+<!--    <script>-->
+<!--        if(("[[${exception}]]"=="")) {-->
+<!--            top.alert("로그인이 필요합니다");-->
+<!--            location.href="/user/login"-->
+<!--        }-->
+<!--        else if(("[[${exception}]]"=="이미 로그인이 되어있습니다")||("[[${exception}]]"=="댓글 내용을 입력해주세요")){-->
+<!--            top.alert("[[${exception}]]");-->
+<!--            location.href="/"-->
+<!--        }-->
 
-    </script>
-</head>
-<body>
-<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="footerFragment">
-    <div class="navbar navbar-dark bg-dark shadow-sm mb-3">
-        <div class="container d-flex justify-content-between">
-            <a href="/user/login" class="navbar-brand d-flex align-items-center">
-                <strong><span th:text="${exception}"></span></strong>
-            </a>
-        </div>
-    </div>
-<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
-<script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-</body>
-</html>
+<!--    </script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<html lagn="ko" xmlns:th="http://www.thymeleaf.org">-->
+<!--<th:block th:fragment="footerFragment">-->
+<!--    <div class="navbar navbar-dark bg-dark shadow-sm mb-3">-->
+<!--        <div class="container d-flex justify-content-between">-->
+<!--            <a href="/user/login" class="navbar-brand d-flex align-items-center">-->
+<!--                <strong><span th:text="${exception}"></span></strong>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>-->
+<!--<script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->

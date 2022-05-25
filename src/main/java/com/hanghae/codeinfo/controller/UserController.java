@@ -48,7 +48,7 @@ public class UserController {
     @PostMapping("/user/join")
     public String saveUser(
             @ModelAttribute("form")
-            @Valid UserJoinRequestDto requestDto
+            UserJoinRequestDto requestDto
     ) {
         Boolean isDuplicate = userService.userDuplicateCheck(requestDto.getUserId());
         if(!isDuplicate) {
