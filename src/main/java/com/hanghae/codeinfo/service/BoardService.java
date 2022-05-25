@@ -97,9 +97,7 @@ public class BoardService {
 
         Board board = boardValidCheck(findBoard);
 
-        Long boardId = board.getPostId();
-
-        boardRepository.deleteById(boardId);
+        boardRepository.deleteById(board.getPostId());
     }
 
 

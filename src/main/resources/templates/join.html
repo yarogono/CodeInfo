@@ -13,11 +13,11 @@
                     <li>
                         <input type="text" id="nickname" name="nickname"
                                minlength="3" maxlength="15" class="nickname"  placeholder="닉네임"
-                               th:field="*{nickname}"
-                               th:class="${#fields.hasErrors('nickname')}? 'form-control fieldError' : 'form-control'">
+                               th:field="*{userId}"
+                               th:class="${#fields.hasErrors('userId')}? 'form-control fieldError' : 'form-control'">
                     </li>
                     <div class="check-span">
-                        <span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}"
+                        <span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"
                               id="join_nickname_check"></span>
                         <span id="nickname_check"></span>
                     </div>

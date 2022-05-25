@@ -1,4 +1,4 @@
-package com.hanghae.codeinfo.utils;
+package com.hanghae.codeinfo.exception;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
