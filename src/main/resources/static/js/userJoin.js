@@ -131,7 +131,6 @@ function init() {
     $("#nickname").change(nickDuplicateCheck);
 }
 
-
 if(PW2_CHECK) {
     init();
 }
