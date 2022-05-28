@@ -46,12 +46,12 @@ public class BoardService {
             model.addAttribute("nextPage", 1);
         } else {
             if(curPage > 0) {
-                int prevPage = boardList.getNumber() - 1;
+                int prevPage = curPage - 1;
                 model.addAttribute("prevPage", prevPage);
             }
 
             if(curPage < totalPages - 1) {
-                int nextPage = boardList.getNumber() + 1;
+                int nextPage = curPage + 1;
                 model.addAttribute("nextPage", nextPage);
             }
         }
