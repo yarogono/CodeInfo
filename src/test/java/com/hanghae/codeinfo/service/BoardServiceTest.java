@@ -1,6 +1,6 @@
 package com.hanghae.codeinfo.service;
 
-import com.hanghae.codeinfo.dto.BoardRequestDto;
+import com.hanghae.codeinfo.dto.board.BoardRequestDto;
 import com.hanghae.codeinfo.exception.ExceptionMessages;
 import com.hanghae.codeinfo.model.Board;
 import com.hanghae.codeinfo.model.User;

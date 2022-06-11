@@ -1,4 +1,4 @@
-package com.hanghae.codeinfo.dto;
+package com.hanghae.codeinfo.dto.board;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

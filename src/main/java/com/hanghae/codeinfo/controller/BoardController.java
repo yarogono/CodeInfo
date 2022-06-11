@@ -1,6 +1,6 @@
 package com.hanghae.codeinfo.controller;
 
-import com.hanghae.codeinfo.dto.BoardRequestDto;
+import com.hanghae.codeinfo.dto.board.BoardRequestDto;
 import com.hanghae.codeinfo.security.UserDetailsImpl;
 import com.hanghae.codeinfo.service.BoardService;
 import lombok.RequiredArgsConstructor;

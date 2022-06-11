@@ -1,9 +1,10 @@
 package com.hanghae.codeinfo.service;
 
+import com.hanghae.codeinfo.dto.board.BoardPageResponseDto;
 import com.hanghae.codeinfo.exception.ExceptionMessages;
 import com.hanghae.codeinfo.model.Board;
 import com.hanghae.codeinfo.model.Comment;
-import com.hanghae.codeinfo.dto.BoardRequestDto;
+import com.hanghae.codeinfo.dto.board.BoardRequestDto;
 import com.hanghae.codeinfo.repository.BoardRepository;
 
 import com.hanghae.codeinfo.security.UserDetailsImpl;
@@ -37,21 +38,27 @@ public class BoardService {
 
         model.addAttribute("boardList", boardList);
 
-        int totalPages = boardList.getTotalPages();
+        int totalPage = boardList.getTotalPages();
         int curPage = boardList.getNumber();
+        int nextPage = curPage + 1;
+        int prevPage = curPage - 1;
+
+        BoardPageResponseDto boardPageResponseDto = BoardPageResponseDto.builder()
+                .totalPage(totalPage)
+                .nextPage(nextPage)
+                .prevPage(prevPage)
+                .curPage(curPage)
+                .build();
 
 
         // ToDo: 로직을 수정해서 리팩토링 필요
-        if(page == 0 && totalPages > 1) {
+        if(page == 0 && totalPage > 1) {
             model.addAttribute("nextPage", 1);
         } else {
             if(curPage > 0) {
-                int prevPage = curPage - 1;
                 model.addAttribute("prevPage", prevPage);
             }
-
-            if(curPage < totalPages - 1) {
-                int nextPage = curPage + 1;
+            if(curPage < totalPage - 1) {
                 model.addAttribute("nextPage", nextPage);
             }
         }
