@@ -31,37 +31,25 @@ public class BoardService {
     private final CommentService commentService;
 
 
-    public void getBoardListDesc(int page, Model model) {
+    public BoardPageResponseDto getBoardListDesc(int page, Model model) {
         Pageable boardPage = PageRequest.of(page, 5, Sort.by("postId").descending());
 
         Page<Board> boardList = boardRepository.findAll(boardPage);
 
-        model.addAttribute("boardList", boardList);
 
         int totalPage = boardList.getTotalPages();
         int curPage = boardList.getNumber();
         int nextPage = curPage + 1;
         int prevPage = curPage - 1;
 
-        BoardPageResponseDto boardPageResponseDto = BoardPageResponseDto.builder()
+
+        return BoardPageResponseDto.builder()
                 .totalPage(totalPage)
                 .nextPage(nextPage)
                 .prevPage(prevPage)
                 .curPage(curPage)
+                .boardList(boardList)
                 .build();
-
-
-        // ToDo: 로직을 수정해서 리팩토링 필요
-        if(page == 0 && totalPage > 1) {
-            model.addAttribute("nextPage", 1);
-        } else {
-            if(curPage > 0) {
-                model.addAttribute("prevPage", prevPage);
-            }
-            if(curPage < totalPage - 1) {
-                model.addAttribute("nextPage", nextPage);
-            }
-        }
     }
 
     public void saveBoard(

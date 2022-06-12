@@ -1,5 +1,6 @@
 package com.hanghae.codeinfo.controller;
 
+import com.hanghae.codeinfo.dto.board.BoardPageResponseDto;
 import com.hanghae.codeinfo.dto.board.BoardRequestDto;
 import com.hanghae.codeinfo.security.UserDetailsImpl;
 import com.hanghae.codeinfo.service.BoardService;
@@ -19,27 +20,49 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @GetMapping("/")
+    @GetMapping("/{page}")
     public String boardListPage(
             Model model,
-            @AuthenticationPrincipal UserDetailsImpl userDetails
+            @AuthenticationPrincipal UserDetailsImpl userDetails,
+            @PathVariable int page
     ) {
 
         if(userDetails != null) {
             model.addAttribute("username", userDetails.getUsername());
         }
-        boardService.getBoardListDesc(0, model);
+
+        BoardPageResponseDto boardPageResponseDto = boardService.getBoardListDesc(page, model);
+
+        int totalPage = boardPageResponseDto.getTotalPage();
+        int prevPage = boardPageResponseDto.getPrevPage();
+        int nextPage = boardPageResponseDto.getNextPage();
+        int curPage = boardPageResponseDto.getCurPage();
+
+        model.addAttribute("boardList", boardPageResponseDto.getBoardList());
+
+        if(page == 0 && totalPage > 1) {
+            model.addAttribute("nextPage", 1);
+        } else {
+            if(curPage > 0) {
+                model.addAttribute("prevPage", prevPage);
+            }
+            if(curPage < totalPage - 1) {
+                model.addAttribute("nextPage", nextPage);
+            }
+        }
+
         return "boardList";
     }
 
-    @GetMapping("/{page}")
-    public String boardListPaging(
-            @PathVariable int page,
-            Model model
-    ) {
-        boardService.getBoardListDesc(page, model);
-        return "boardList";
-    }
+
+//    @GetMapping("/{page}")
+//    public String boardListPaging(
+//            @PathVariable int page,
+//            Model model
+//    ) {
+//        boardService.getBoardListDesc(page, model);
+//        return "boardList";
+//    }
 
     @GetMapping("/board/{id}")
     public String boardDetailPage(
